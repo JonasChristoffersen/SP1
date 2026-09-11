@@ -7,7 +7,7 @@ public class Main {
     int bandFameLevel = 1;
     int bandCurrentFans = 1200;
     int bandMaxFans = 5000;
-    int bandXP = 0;
+    double bandXP = 0.0;
     double bandCurrentBalance = 500.0;
     boolean isBandActive = true;
 
@@ -97,7 +97,50 @@ public class Main {
         return isBandActive;
     }
 
-    public void playGig(int venueCapacity, int attendance) {
+    public void playSingleGig(int venueCapacity, int attendance) {
+        double attendancePercentage = (double) attendance / venueCapacity * 100;
+        int gigGainedFans;
+        double gigGainedMoney;
+        double gigGainedXP;
+        String concertTurnout;
+
+        if (attendancePercentage >= 80) {
+            gigGainedFans = 200;
+            concertTurnout = "Great concert!";
+            gigGainedMoney = attendance * 2.8;
+            gigGainedXP = attendance;
+            bandCurrentFans += gigGainedFans;
+            bandCurrentBalance += gigGainedMoney;
+            bandXP += gigGainedXP;
+        } else if (attendancePercentage >= 30) {
+            concertTurnout = "Decent concert...";
+            gigGainedMoney = attendance * 2.2;
+            gigGainedFans = 50;
+            gigGainedXP = attendance * 0.8;
+            bandCurrentFans += gigGainedFans;
+            bandCurrentBalance += gigGainedMoney;
+            bandXP += gigGainedXP;
+        } else {
+            concertTurnout = "Disaster!";
+            gigGainedMoney = attendance * 1.5;
+            gigGainedFans = -100;
+            gigGainedXP = attendance * 0.3;
+            bandCurrentFans += gigGainedFans;
+            bandCurrentBalance += gigGainedMoney;
+            bandXP += gigGainedXP;
+        }
+
+        System.out.println("\n" + "====== GIG NIGHT ======"
+                + "\n" + "Playing at venue (capacity: " + venueCapacity + ")"
+                + "\n" + "Attendance: " + attendance + " (" + attendancePercentage + "%)"
+                + "\n" + "Turnout: " + concertTurnout
+                + "\n" + "Fans: " + (bandCurrentFans - gigGainedFans) + " -> " + bandCurrentFans
+                + "\n" + "Money: " + (bandCurrentBalance - gigGainedMoney) + " -> " + bandCurrentBalance
+                + "\n" + "XP: " + (bandXP - gigGainedXP) + " -> " + bandXP
+        );
+    }
+
+    public void gainFans(int amount) {
 
     }
 
@@ -105,5 +148,6 @@ public class Main {
         printBandProfile();
         printRepertoire();
         isActive();
+        playSingleGig(500, 400);
     }
 }
