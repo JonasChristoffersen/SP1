@@ -5,8 +5,7 @@ public class Main {
     //Variables for band profile
     String bandName = "Eurythmics";
     int bandFameLevel = 1;
-    int bandCurrentFans = 4950;
-    int bandMaxFans;
+    int bandCurrentFans = 250;
     double bandXP = 0.0;
     double bandCurrentBalance = 500.0;
     boolean isBandActive = true;
@@ -45,7 +44,7 @@ public class Main {
     }
 
     public double getFanPercentage() {
-        return (double) bandCurrentFans / bandMaxFanLogic() * 100;
+        return (double) bandCurrentFans / bandMaxFans() * 100;
     }
 
     public void printBandProfile() {
@@ -70,7 +69,7 @@ public class Main {
                 + "\n" + "Genre: " + bandMusicGenre + " (" + musicGenreText + ")"
                 + "\n" + "Fame level: " + bandFameLevel
                 + "\n" + "Status: " + getStatusTitle(bandFameLevel)
-                + "\n" + "Fans: " + bandCurrentFans + "/" + bandMaxFanLogic() + " (" + getFanPercentage() + "%)"
+                + "\n" + "Fans: " + bandCurrentFans + "/" + bandMaxFans() + " (" + getFanPercentage() + "%)"
                 + "\n" + "XP: " + bandXP
                 + "\n" + "Money: $" + bandCurrentBalance
                 + "\n" + "Active: " + isBandActive
@@ -140,8 +139,9 @@ public class Main {
         );
     }
 
-    public int bandMaxFanLogic() {
-        //Logic for
+    public int bandMaxFans() { //rename of bandMaxFans
+        int bandMaxFans;
+        //Logic for max fans in perspective to what fame level band is
         if (bandFameLevel == 1) {
             return bandMaxFans = 5000;
         } else if (bandFameLevel == 2) {
@@ -159,21 +159,30 @@ public class Main {
 
     public void gainFans(int amount) {
         System.out.println(header("GAINED FANS"));
-        if (bandCurrentFans <= bandMaxFanLogic()) {
-            if ((bandCurrentFans + amount) <= bandMaxFans) {
+        if (bandCurrentFans <= bandMaxFans()) {
+            if ((bandCurrentFans + amount) <= bandMaxFans()) {
                 bandCurrentFans += amount;
                 System.out.println("Fans gained: " + amount
                         + "\n" + "Total fans: " + (bandCurrentFans - amount) + " -> " + bandCurrentFans
                 );
             } else {
-                int fanMaxDifference = (bandCurrentFans + amount) - bandMaxFans;
+                int fanMaxDifference = (bandCurrentFans + amount) - bandMaxFans();
                 System.out.println("INFO: Max fan limit reached!"
                         + "\n" + "Fans gained: " + amount
-                        + "\n" + "Total fans: " + bandCurrentFans + " -> " + bandMaxFans
+                        + "\n" + "Total fans: " + bandCurrentFans + " -> " + bandMaxFans()
                         + " (" + fanMaxDifference + " lost due to fan limit)"
                 );
-                bandCurrentFans = bandMaxFans;
+                bandCurrentFans = bandMaxFans();
             }
+        }
+    }
+
+    //W.I.P...
+    //Fjerner fans, checker om bandet opløses
+    public void loseFans(int amount) {
+        System.out.println(header("FANS LOST"));
+        if (bandCurrentFans > 0) {
+
         }
     }
 
