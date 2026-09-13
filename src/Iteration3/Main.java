@@ -73,10 +73,13 @@ public class Main {
                 + "\n" + "Fame level: " + bandFameLevel
                 + "\n" + "Status: " + getStatusTitle(bandFameLevel)
                 + "\n" + "Fans: " + bandCurrentFans + "/" + bandMaxFans() + " (" + getFanPercentage() + "%)"
+                + "\n" + "Fan base: " + getFanPercentage() + "% of venue capacity"
                 + "\n" + "XP: " + bandXP
                 + "\n" + "Money: $" + bandCurrentBalance
                 + "\n" + "Active: " + isBandActive
         );
+
+        printRepertoire();
     }
 
     public void printRepertoire() {
@@ -135,20 +138,19 @@ public class Main {
     }
 
     public int bandMaxFans() {
-        int bandMaxFans;
         //Logic for max fans in perspective to what fame level band is
         if (bandFameLevel == 1) {
-            return bandMaxFans = 5000;
+            return 5000;
         } else if (bandFameLevel == 2) {
-            return bandMaxFans = 15000;
+            return 15000;
         } else if (bandFameLevel == 3) {
-            return bandMaxFans = 50000;
+            return 50000;
         } else if (bandFameLevel == 4) {
-            return bandMaxFans = 200000;
+            return 200000;
         } else if (bandFameLevel == 5) {
-            return bandMaxFans = 1000000;
+            return 1000000;
         } else {
-            return bandMaxFans = 0;
+            return 0;
         }
     }
 
@@ -195,9 +197,49 @@ public class Main {
         }
     }
 
+    public boolean isLosingRelevance() {
+        double fanWarningLevel = 0.25;
+        if (bandCurrentFans <= (bandMaxFans() * fanWarningLevel)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void addXP(int amount) {
+        bandXP += amount;
+        levelUp();
+    }
+
+    public int xpThreshold() {
+        if (bandFameLevel == 1) {
+            return 10000;
+        } else if (bandFameLevel == 2) {
+            return 25000;
+        } else if (bandFameLevel == 3) {
+            return 50000;
+        } else if (bandFameLevel == 4) {
+            return 100000;
+        } else if (bandFameLevel == 5) {
+            return 250000;
+        } else {
+            return 0;
+        }
+    }
+
+    //Øger fame level, nulstiller XP, øger maxFans
+    public void levelUp() {
+        if (bandXP >= xpThreshold()) {
+            bandFameLevel++;
+            bandXP = 0;
+        }
+    }
+
     public void main() {
         printBandProfile();
-        printRepertoire();
+
+        playSingleGig(500, 450);
+        addXP(5000000);
 
         if (spendMoney(20000.0)) {
             System.out.println(header("PURCHASE")
@@ -207,10 +249,12 @@ public class Main {
                     + "\n" +"Not enough money!");
         }
 
-        gainFans(100);
-        loseFans(0);
-        spendMoney(500);
-        isActive();
-        playSingleGig(500, 50);
+        if (isLosingRelevance()) {
+            System.out.println(header("LOSING LEVERAGE!")
+                    + "\n" + "WARNING: Plan a comeback!"
+            );
+        }
+
+        printBandProfile();
     }
 }
