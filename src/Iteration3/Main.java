@@ -10,6 +10,9 @@ public class Main {
     double bandCurrentBalance = 500.0;
     boolean isBandActive = true;
 
+    int gigGainedFans;
+    double gigGainedMoney;
+
     //Variables regarding music genres
     char[] allMusicGenres = {'R', 'E', 'P', 'H'}; // R = Rock   E = Electronic   P = Pop   H = Hiphop
     char bandMusicGenre = allMusicGenres[0];
@@ -98,34 +101,26 @@ public class Main {
 
     public void playSingleGig(int venueCapacity, int attendance) {
         double attendancePercentage = (double) attendance / venueCapacity * 100;
-        int gigGainedFans;
-        double gigGainedMoney;
         double gigGainedXP;
         String concertTurnout;
 
         if (attendancePercentage >= 80) {
-            gigGainedFans = 200;
             concertTurnout = "Great concert!";
-            gigGainedMoney = attendance * 2.8;
+            earnMoney(attendance * 2.8);
+            gainFans(200);
             gigGainedXP = attendance;
-            bandCurrentFans += gigGainedFans;
-            bandCurrentBalance += gigGainedMoney;
             bandXP += gigGainedXP;
         } else if (attendancePercentage >= 30) {
             concertTurnout = "Decent concert...";
-            gigGainedMoney = attendance * 2.2;
-            gigGainedFans = 50;
+            earnMoney(attendance * 2.2);
+            gainFans(50);
             gigGainedXP = attendance * 0.8;
-            bandCurrentFans += gigGainedFans;
-            bandCurrentBalance += gigGainedMoney;
             bandXP += gigGainedXP;
         } else {
             concertTurnout = "Disaster!";
-            gigGainedMoney = attendance * 1.5;
-            gigGainedFans = -100;
+            earnMoney(attendance * 1.5);
+            loseFans(100);
             gigGainedXP = attendance * 0.3;
-            bandCurrentFans += gigGainedFans;
-            bandCurrentBalance += gigGainedMoney;
             bandXP += gigGainedXP;
         }
 
@@ -139,7 +134,7 @@ public class Main {
         );
     }
 
-    public int bandMaxFans() { //rename of bandMaxFans
+    public int bandMaxFans() {
         int bandMaxFans;
         //Logic for max fans in perspective to what fame level band is
         if (bandFameLevel == 1) {
@@ -158,16 +153,15 @@ public class Main {
     }
 
     public void gainFans(int amount) {
-        System.out.println(header("GAINED FANS"));
         if (bandCurrentFans <= bandMaxFans()) {
             if ((bandCurrentFans + amount) <= bandMaxFans()) {
                 bandCurrentFans += amount;
-                System.out.println("Fans gained: " + amount
-                        + "\n" + "Total fans: " + (bandCurrentFans - amount) + " -> " + bandCurrentFans
-                );
+                gigGainedFans = amount;
             } else {
                 int fanMaxDifference = (bandCurrentFans + amount) - bandMaxFans();
-                System.out.println("INFO: Max fan limit reached!"
+                System.out.println();
+                System.out.println(header("GAINED FANS")
+                        + "\n" + "INFO: Max fan limit reached!"
                         + "\n" + "Fans gained: " + amount
                         + "\n" + "Total fans: " + bandCurrentFans + " -> " + bandMaxFans()
                         + " (" + fanMaxDifference + " lost due to fan limit)"
@@ -180,11 +174,7 @@ public class Main {
     public void loseFans(int amount) {
         if ((bandCurrentFans - amount) > 0) {
             bandCurrentFans -= amount;
-            System.out.println(header("LOST FANS")
-                    + "\n" + "Fans lost: " + amount
-                    + "\n" + "Total fans: " + (bandCurrentFans + amount) + " -> " + bandCurrentFans);
-            System.out.println(
-            );
+            gigGainedFans = amount * -1;
         } else {
             bandCurrentFans -= amount;
             isActive();
@@ -192,10 +182,10 @@ public class Main {
     }
 
     public double earnMoney(double amount) {
+        gigGainedMoney = amount;
         return bandCurrentBalance += amount;
     }
 
-    //Fjerner penge, returnerer true hvis det lykkedes
     public boolean spendMoney(double amount) {
         if (bandCurrentBalance > amount) {
             bandCurrentBalance -= amount;
@@ -204,7 +194,6 @@ public class Main {
             return false;
         }
     }
-
 
     public void main() {
         printBandProfile();
@@ -219,9 +208,9 @@ public class Main {
         }
 
         gainFans(100);
-        loseFans(550);
+        loseFans(0);
         spendMoney(500);
         isActive();
-        playSingleGig(500, 400);
+        playSingleGig(500, 50);
     }
 }
