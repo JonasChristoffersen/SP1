@@ -177,12 +177,17 @@ public class Main {
         }
     }
 
-    //W.I.P...
-    //Fjerner fans, checker om bandet opløses
     public void loseFans(int amount) {
-        System.out.println(header("FANS LOST"));
-        if (bandCurrentFans > 0) {
-
+        if ((bandCurrentFans - amount) > 0) {
+            bandCurrentFans -= amount;
+            System.out.println(header("LOST FANS")
+                    + "\n" + "Fans lost: " + amount
+                    + "\n" + "Total fans: " + (bandCurrentFans + amount) + " -> " + bandCurrentFans);
+            System.out.println(
+            );
+        } else {
+            bandCurrentFans -= amount;
+            isActive();
         }
     }
 
@@ -190,6 +195,7 @@ public class Main {
         printBandProfile();
         printRepertoire();
         gainFans(100);
+        loseFans(550);
         isActive();
         playSingleGig(500, 400);
     }
