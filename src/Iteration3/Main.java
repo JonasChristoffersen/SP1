@@ -191,11 +191,36 @@ public class Main {
         }
     }
 
+    public double earnMoney(double amount) {
+        return bandCurrentBalance += amount;
+    }
+
+    //Fjerner penge, returnerer true hvis det lykkedes
+    public boolean spendMoney(double amount) {
+        if (bandCurrentBalance > amount) {
+            bandCurrentBalance -= amount;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     public void main() {
         printBandProfile();
         printRepertoire();
+
+        if (spendMoney(20000.0)) {
+            System.out.println(header("PURCHASE")
+                    + "\n" + "Bought new equipment!");
+        } else {
+            System.out.println(header("PURCHASE")
+                    + "\n" +"Not enough money!");
+        }
+
         gainFans(100);
         loseFans(550);
+        spendMoney(500);
         isActive();
         playSingleGig(500, 400);
     }
