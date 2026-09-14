@@ -120,4 +120,69 @@ public class Band {
     public double getFanPercentage() {
         return (double) bandCurrentFans / bandMaxFans(getBandFameLevel()) * 100;
     }
+
+    public void gainFans(int amount) {
+        if (bandCurrentFans <= bandMaxFans(bandFameLevel)) {
+            if ((bandCurrentFans + amount) <= bandMaxFans(bandFameLevel)) {
+                bandCurrentFans += amount;
+            } else {
+                bandCurrentFans = bandMaxFans(bandFameLevel);
+            }
+        }
+    }
+
+    public void loseFans(int amount) {
+        if ((bandCurrentFans - amount) > 0) {
+            bandCurrentFans -= amount;
+        } else {
+            bandCurrentFans -= amount;
+            isActive();
+        }
+    }
+
+    public boolean isActive() {
+        if (bandCurrentFans <= 0) {
+            isBandActive = false;
+            System.out.println("""
+                ┏━╸┏━┓┏┳┓┏━╸   ┏━┓╻ ╻┏━╸┏━┓╻
+                ┃╺┓┣━┫┃┃┃┣╸    ┃ ┃┃┏┛┣╸ ┣┳┛╹
+                ┗━┛╹ ╹╹ ╹┗━╸   ┗━┛┗┛ ┗━╸╹┗╸╹
+                """
+            );
+            System.exit(0);
+        }
+        return isBandActive;
+    }
+
+    public double earnMoney(double amount) {
+        return bandCurrentBalance += amount;
+    }
+
+    public void addXP(int amount) {
+        bandXP += amount;
+        levelUp();
+    }
+
+    public void levelUp() {
+        if (bandXP >= xpThreshold()) {
+            bandFameLevel++;
+            bandXP = 0;
+        }
+    }
+
+    public int xpThreshold() {
+        if (bandFameLevel == 1) {
+            return 10000;
+        } else if (bandFameLevel == 2) {
+            return 25000;
+        } else if (bandFameLevel == 3) {
+            return 50000;
+        } else if (bandFameLevel == 4) {
+            return 100000;
+        } else if (bandFameLevel == 5) {
+            return 250000;
+        } else {
+            return 0;
+        }
+    }
 }

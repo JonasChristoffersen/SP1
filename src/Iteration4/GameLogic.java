@@ -15,7 +15,8 @@ public class GameLogic {
                 + "\n" + "Genre: " + band.getBandMusicGenreChar() + " (" + band.getBandMusicGenre() + ")"
                 + "\n" + "Fame level: " + band.getBandFameLevel()
                 + "\n" + "Status: " + band.getStatusTitle(band.getBandFameLevel())
-                + "\n" + "Fans: " + band.getBandCurrentFans() + "/" + band.bandMaxFans(band.getBandFameLevel()) + " (" + band.getFanPercentage() + "%)"
+                + "\n" + "Fans: " + band.getBandCurrentFans() + "/" + band.bandMaxFans(band.getBandFameLevel())
+                + " (" + band.getFanPercentage() + "%)"
                 + "\n" + "Fan base: " + band.getFanPercentage() + "% of venue capacity"
                 + "\n" + "XP: " + band.getBandXP()
                 + "\n" + "Money: $" + band.getBandCurrentBalance()
@@ -69,39 +70,31 @@ public class GameLogic {
         }
     }
 
-
     public void startConcert(Band band) {
         System.out.println("\n" + band.getBandName() + " is setting up arrangements..."
-                + "\n " + "What kind of event should they be looking for?"
-                + "\n" + "1 - Small venue "
+                + "\n" + "What kind of event should they be looking for?"
+                + "\n" + "1 - Small venue (Unlocked - Fame level 1)"
+                + "\n" + "2 - Medium Venue (" + getVenueStatus(isVenueUnlocked(band, 2)) + " - Fame level 2)"
+                + "\n" + "3 - Large Venue (" + getVenueStatus(isVenueUnlocked(band, 3)) + " - Fame level 3)"
+                + "\n" + "4 - Stadium concert (" + "Locked" + " - Visit the shop)"
+                + "\n" + "5 - Festival small stage (" + getVenueStatus(isVenueUnlocked(band, 3)) + " - Fame level 2)"
+                + "\n" + "6 - Festival medium stage (" + getVenueStatus(isVenueUnlocked(band, 4)) + " - Fame level 3)"
+                + "\n" + "7 - Festival Large Stage (" + getVenueStatus(isVenueUnlocked(band, 4)) +" - Fame level 4)"
+                + "\n" + "8 - Festival main stage (" + getVenueStatus(isVenueUnlocked(band, 5)) + " - Fame level 5)"
+                + "\n" + "9 - Start a tour (" + "Locked" + " - Visit the shop)"
         );
     }
 
-    public void venueUnlocked(Band band) {
-        int[]
-
-
+    public String getVenueStatus(boolean isVenueUnlocked) {
+        if (isVenueUnlocked) {
+            return "Unlocked";
+        } else {
+            return "Locked";
+        }
     }
 
-
-
-
-    public void smallVenue(Band band) {
-    }
-
-    public void mediumVenue(Band band) {
-    }
-
-    public void largeVenue(Band band) {
-    }
-
-    public void festivalSmallStage(Band band) {
-    }
-
-    public void festivalMediumStage(Band band) {
-    }
-
-    public void festivalMainStage(Band band) {
+    public boolean isVenueUnlocked(Band band, int requiredFameLevel) {
+        return band.getBandFameLevel() >= requiredFameLevel;
     }
 
     public void shop(Band band) {
