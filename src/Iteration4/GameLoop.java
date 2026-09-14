@@ -50,6 +50,7 @@ public class GameLoop {
         while (true) {
             System.out.println("""
                     
+                    ====== MAIN MENU ======
                     What do you wanna do next?
                     (Type the number of an action listed below)
                     1 - Band stats

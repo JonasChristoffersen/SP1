@@ -5,18 +5,21 @@ public class GameLogic {
 
     //Band stats
     public void bandStats(Band band) {
-        System.out.println("Band profile"
+        System.out.println("\n" + "====== Band profile ======"
                 + "\n" + "Name: " + band.getBandName()
                 + "\n" + "Genre: " + band.getBandMusicGenreChar() + " (" + band.getBandMusicGenre() + ")"
                 + "\n" + "Fame level: " + band.getBandFameLevel()
-                //+ "\n" + "Status: " + getStatusTitle(band.getBandFameLevel())
-                //+ "\n" + "Fans: " + band.getBandCurrentFans() + "/" + bandMaxFans() + " (" + getFanPercentage() + "%)"
-                //+ "\n" + "Fan base: " + getFanPercentage() + "% of venue capacity"
+                + "\n" + "Status: " + band.getStatusTitle(band.getBandFameLevel())
+                + "\n" + "Fans: " + band.getBandCurrentFans() + "/" + band.bandMaxFans(band.getBandFameLevel()) + " (" + band.getFanPercentage() + "%)"
+                + "\n" + "Fan base: " + band.getFanPercentage() + "% of venue capacity"
                 + "\n" + "XP: " + band.getBandXP()
                 + "\n" + "Money: $" + band.getBandCurrentBalance()
                 + "\n" + "Active: " + band.isBandActive()
         );
     }
+
+    //Check the "band.getBandMusicGenreChar()" method!
+    //The method returns nothing!
 
     public void startGame(Band band) {
         System.out.println();

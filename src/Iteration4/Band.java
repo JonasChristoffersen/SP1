@@ -63,6 +63,7 @@ public class Band {
         return bandMusicGenre;
     }
     public char getBandMusicGenreChar() {
+
         return bandMusicGenreChar;
     }
     public void setBandMusicGenre(String bandMusicGenre) {
@@ -79,5 +80,43 @@ public class Band {
             this.bandMusicGenre = bandMusicGenre;
             bandMusicGenreChar = 'H';
         }
+    }
+
+
+    public String getStatusTitle(int fameLevel) {
+        if (fameLevel == 1) {
+            return "Unknown - Playing in garages";
+        } else if (fameLevel == 2) {
+            return "Local Hero - Small venues await";
+        } else if (fameLevel == 3) {
+            return "Rising Star - Festival invitations coming in";
+        } else if (fameLevel == 4) {
+            return "Mainstream - Arena tours possible";
+        } else if (fameLevel == 5) {
+            return "Superstar - Stadium glory!";
+        } else {
+            return "Unknown fame level!";
+        }
+    }
+
+    public int bandMaxFans(int fameLevel) {
+        //Logic for max fans in perspective to what fame level band is
+        if (fameLevel == 1) {
+            return 5000;
+        } else if (fameLevel == 2) {
+            return 15000;
+        } else if (fameLevel == 3) {
+            return 50000;
+        } else if (fameLevel == 4) {
+            return 200000;
+        } else if (fameLevel == 5) {
+            return 1000000;
+        } else {
+            return 0;
+        }
+    }
+
+    public double getFanPercentage() {
+        return (double) bandCurrentFans / bandMaxFans(getBandFameLevel()) * 100;
     }
 }
