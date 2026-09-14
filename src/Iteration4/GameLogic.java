@@ -39,34 +39,69 @@ public class GameLogic {
             if (userGameChoice == 1) {
                 bandStats(band);
             } else if (userGameChoice == 2) {
-                startConcert();
+                startConcert(band);
             } else if (userGameChoice == 3) {
                 shop(band);
             } else if (userGameChoice == 0) {
-                while (true) {
-                    System.out.println("\n" + "Are you sure you want to exit the game?"
-                            + "\n" + "(Y = Yes, exit the game) (N = No, i want to keep playing)"
-                    );
-                    //Flosh of keyboardInput
-                    keyboardInput.nextLine();
-                    String userExitInput = keyboardInput.nextLine();
-                    if (userExitInput.equalsIgnoreCase("y")) {
-                        System.out.println("Thanks for playing! See you soon.");
-                        System.exit(0);
-                    } else if (userExitInput.equalsIgnoreCase("n")) {
-                        break;
-                    } else {
-                        System.out.println("Invalid command!");
-                    }
-                }
+                exitConfirmationLoop();
             } else {
                 System.out.println("Invalid command!");
             }
         }
     }
 
-    public void startConcert() {
+    public void exitConfirmationLoop() {
+        //Flush of keyboardInput
+        keyboardInput.nextLine();
+        while (true) {
+            System.out.println("\n" + "Are you sure you want to exit the game?"
+                    + "\n" + "(Y = Yes, exit the game) (N = No, i want to keep playing)"
+            );
+            String userExitInput = keyboardInput.nextLine();
+            if (userExitInput.equalsIgnoreCase("y")) {
+                System.out.println("Thanks for playing! See you soon.");
+                System.exit(0);
+            } else if (userExitInput.equalsIgnoreCase("n")) {
+                break;
+            } else {
+                System.out.println("Invalid command!");
+            }
+        }
+    }
 
+
+    public void startConcert(Band band) {
+        System.out.println("\n" + band.getBandName() + " is setting up arrangements..."
+                + "\n " + "What kind of event should they be looking for?"
+                + "\n" + "1 - Small venue "
+        );
+    }
+
+    public void venueUnlocked(Band band) {
+        int[]
+
+
+    }
+
+
+
+
+    public void smallVenue(Band band) {
+    }
+
+    public void mediumVenue(Band band) {
+    }
+
+    public void largeVenue(Band band) {
+    }
+
+    public void festivalSmallStage(Band band) {
+    }
+
+    public void festivalMediumStage(Band band) {
+    }
+
+    public void festivalMainStage(Band band) {
     }
 
     public void shop(Band band) {
