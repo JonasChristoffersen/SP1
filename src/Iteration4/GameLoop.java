@@ -28,8 +28,8 @@ public class GameLoop {
         //Read input from user + logic regarding users choice
         while (true) {
             //First choice user is presented with
-            System.out.println("Do you wish to choose the name of your band, or roll with a default option?"
-                            + "\n" + "(Y = Yes, i want to choose my own name) (N = No, just roll the default name)"
+            System.out.println("Do you wish to create your own band, or roll with a default option?"
+                            + "\n" + "(Y = Yes, i want to create my own band) (N = No, just roll the default option)"
             );
             String userAnswer = keyboardInput.nextLine();
             //Logic for renaming the band or not
@@ -37,6 +37,21 @@ public class GameLoop {
                 System.out.println("\n" + "What do you want to name your band?");
                 String bandRename = keyboardInput.nextLine();
                 band.setBandName(bandRename);
+                while (true) {
+                    System.out.println("\n" + "What do genre should your band play?"
+                            + "\n" + "You can choose between: Rock, Electronic, Pop and Hiphop"
+                    );
+                    String bandGenreChoice = keyboardInput.nextLine();
+                    if (bandGenreChoice.equalsIgnoreCase("rock")
+                            || bandGenreChoice.equalsIgnoreCase("electronic")
+                            || bandGenreChoice.equalsIgnoreCase("pop")
+                            || bandGenreChoice.equalsIgnoreCase("hiphop")) {
+                        band.setBandMusicGenre(bandGenreChoice);
+                        break;
+                    } else {
+                        invalidCommandText();
+                    }
+                }
                 break;
             } else if (userAnswer.equalsIgnoreCase("n")) {
                 break;

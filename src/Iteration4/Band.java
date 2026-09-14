@@ -7,8 +7,9 @@ public class Band {
     private double bandXP = 0.0;
     private double bandCurrentBalance = 500.0;
     private boolean isBandActive = true;
+    char[] allMusicGenres = {'R', 'E', 'P', 'H'}; // R = Rock   E = Electronic   P = Pop   H = Hiphop
     private String bandMusicGenre = "Rock";
-    private char bandMusicGenreChar;
+    private char bandMusicGenreChar = allMusicGenres[0];
 
     //bandFameLevel
     public void setBandFameLevel(int bandFameLevel) {
@@ -62,24 +63,24 @@ public class Band {
     public String getBandMusicGenre() {
         return bandMusicGenre;
     }
-    public char getBandMusicGenreChar() {
-
-        return bandMusicGenreChar;
-    }
     public void setBandMusicGenre(String bandMusicGenre) {
-        if (bandMusicGenre.equalsIgnoreCase("rock")) {
-            this.bandMusicGenre = bandMusicGenre;
-            bandMusicGenreChar = 'R';
-        } else if (bandMusicGenre.equalsIgnoreCase("electronic")) {
-            this.bandMusicGenre = bandMusicGenre;
-            bandMusicGenreChar = 'E';
-        } else if (bandMusicGenre.equalsIgnoreCase("pop")) {
-            this.bandMusicGenre = bandMusicGenre;
-            bandMusicGenreChar = 'P';
-        } else if (bandMusicGenre.equalsIgnoreCase("hiphop")) {
-            this.bandMusicGenre = bandMusicGenre;
-            bandMusicGenreChar = 'H';
+        if (bandMusicGenre.equalsIgnoreCase("Rock")) {
+            this.bandMusicGenre = "Rock";
+            this.bandMusicGenreChar = allMusicGenres[0]; //R
+        } else if (bandMusicGenre.equalsIgnoreCase("Electronic")) {
+            this.bandMusicGenre = "Electronic";
+            this.bandMusicGenreChar = allMusicGenres[1]; //E
+        } else if (bandMusicGenre.equalsIgnoreCase("Pop")) {
+            this.bandMusicGenre = "Pop";
+            this.bandMusicGenreChar = allMusicGenres[2]; //P
+        } else if (bandMusicGenre.equalsIgnoreCase("Hiphop")) {
+            this.bandMusicGenre = "Hiphop";
+            this.bandMusicGenreChar = allMusicGenres[3]; //H
         }
+    }
+    //getBandMusicGenreChar
+    public char getBandMusicGenreChar() {
+        return bandMusicGenreChar;
     }
 
 
