@@ -67,6 +67,9 @@ public class GameLoop {
         //showMainMenu
     public void showMainMenu(Band band) {
         while (true) {
+
+            //Exception handling
+            //Local variable set to 50, to make sure it won't hit any if statement
             System.out.println("""
                     
                     ====== 🔶 MAIN MENU 🔶 ======

@@ -9,41 +9,60 @@ public class GameLogic {
 
     //Needed class
     VenueLogic venueLogic = new VenueLogic();
+    Shop shop = new Shop();
+
+    //Exception handler for int
+    int userInputInt;
+    public void exceptionHandlerInt() {
+        //keyboardInput.next();
+        try {
+            userInputInt = keyboardInput.nextInt();
+        } catch (Exception e) {
+            System.out.println("Error: exceptionHandlerInt could not process input correctly");
+        }
+    }
+    //Exception handler for String
+    String userInputString;
+    public void exceptionHandlerString() {
+        //keyboardInput.next();
+        try {
+            userInputString = keyboardInput.nextLine();
+        } catch (Exception e) {
+            System.out.println("Error: exceptionHandlerString could not process input correctly");
+        }
+    }
 
     //This class is thought to serve logics like if statements and so on regarding the game!
 
     //Band stats
     public void bandStats(Band band) {
         System.out.println("\n" + "====== 📝 Band profile 📝 ======"
-                + "\n" + "Name: " + band.getBandName()
-                + "\n" + "Genre: " + band.getBandMusicGenreChar() + " (" + band.getBandMusicGenre() + ")"
-                + "\n" + "Fame level: " + band.getBandFameLevel()
-                + "\n" + "Status: " + band.getStatusTitle(band.getBandFameLevel())
-                + "\n" + "Fans: " + band.getBandCurrentFans() + "/" + band.bandMaxFans(band.getBandFameLevel())
-                + " (" + band.getFanPercentage() + "%)"
-                + "\n" + "Fan base: " + band.getFanPercentage() + "% of venue capacity"
-                + "\n" + "XP: " + band.getBandXP()
-                + "\n" + "Money: $" + band.getBandCurrentBalance()
-                + "\n" + "Active: " + band.isBandActive()
-        );
+                    //+ "\n" + "(Press any key when you are ready to go back)"
+                    + "\n" + "Name: " + band.getBandName()
+                    + "\n" + "Genre: " + band.getBandMusicGenreChar() + " (" + band.getBandMusicGenre() + ")"
+                    + "\n" + "Fame level: " + band.getBandFameLevel()
+                    + "\n" + "Status: " + band.getStatusTitle(band.getBandFameLevel())
+                    + "\n" + "Fans: " + band.getBandCurrentFans() + "/" + band.bandMaxFans(band.getBandFameLevel())
+                    + " (" + band.getFanPercentage() + "%)"
+                    + "\n" + "Fan base: " + band.getFanPercentage() + "% of venue capacity"
+                    + "\n" + "XP: " + band.getBandXP()
+                    + "\n" + "Money: $" + band.getBandCurrentBalance()
+                    + "\n" + "Active: " + band.isBandActive()
+            );
     }
+
 
     public void startGame(Band band) {
         while (true) {
-            if (isFirstTimer()) {
-                firstTimerMessage();
-            } else {
-                standardGameMenu();
-            }
-
+            gameMenuMessages();
             int userGameChoice = keyboardInput.nextInt();
-            if (userGameChoice == 1) {
+            if (userGameChoice  == 1) {
                 bandStats(band);
-            } else if (userGameChoice == 2) {
+            } else if (userGameChoice  == 2) {
                 playConcert(band);
-            } else if (userGameChoice == 3) {
-                shop(band);
-            } else if (userGameChoice == 0) {
+            } else if (userGameChoice  == 3) {
+                shop.shopMenu(band);
+            } else if (userGameChoice  == 0) {
                 exitConfirmationLoop();
             } else {
                 System.out.println("Invalid command!");
@@ -52,9 +71,6 @@ public class GameLogic {
     }
 
     int count = 0;
-    //Implement logic for text that will be displayed first time you open the game!
-    //It could be done with a local count variable, that got count++;
-    //The method could be created as boolean
     public boolean isFirstTimer() {
         if (count == 0) {
             count++;
@@ -64,25 +80,25 @@ public class GameLogic {
         }
     }
 
-    public void firstTimerMessage() {
-        System.out.println("""
+
+    public void gameMenuMessages() {
+        if (isFirstTimer()) {
+            System.out.println("""
                     
                     ====== 🚀 BAND SIM 🚀 ======
                     Your journey to becoming a legendary band starts here!
-                    Build your reputation, grow your fanbase, earn money and gain experience by 
+                    Build your reputation, grow your fanbase, earn money and gain experience by
                     playing concerts and upgrading your equipment.
-                    Keep an eye on your Fame Level — the more famous you become, the bigger 
+                    Keep an eye on your Fame Level — the more famous you become, the bigger
                     opportunities will become available.
                     (Type the number of an action listed below)
                     1 - 📝 Band stats
                     2 - 🎸 Play a concert/tour
                     3 - 🛒 Shop
                     0 - ❌ Exit game"""
-        );
-    }
-
-    public void standardGameMenu() {
-        System.out.println("""
+            );
+        } else {
+            System.out.println("""
                     
                     ====== 🎵 BAND SIM 🎵 ======
                     (Type the number of an action listed below)
@@ -90,7 +106,8 @@ public class GameLogic {
                     2 - 🎸 Play a concert/tour
                     3 - 🛒 Shop
                     0 - ❌ Exit game"""
-        );
+            );
+        }
     }
 
     public void exitConfirmationLoop() {
@@ -116,7 +133,7 @@ public class GameLogic {
     public void playConcert(Band band) {
         while (true) {
             //Print of options
-            System.out.println("====== 🎸 PLAY A CONCERT/TOUR 🎸 ======"
+            System.out.println("\n" + "====== 🎸 PLAY A CONCERT/TOUR 🎸 ======"
                     + "\n" + band.getBandName() + " is setting up arrangements..."
                     + "\n" + "What kind of event should they be looking for?"
                     + "\n" + "(Type the number of an action listed below)"
@@ -171,37 +188,5 @@ public class GameLogic {
 
     public boolean isVenueUnlocked(Band band, int requiredFameLevel) {
         return band.getBandFameLevel() >= requiredFameLevel;
-    }
-
-    public void shop(Band band) {
-        while (true) {
-            System.out.println("\n" + "====== 🛒 SHOP 🛒 ======"
-                    + "\n" + "This is the shop - Here you can buy/upgrade equipment"
-                    + "\n" + "(Type the number of an item listed below, to show more details)"
-                    + "\n" + "1 - Speakers " + "(Level 0)"
-                    + "\n" + "2 - Equipment " + "(Level 0)"
-                    + "\n" + "? - Stadium concert unlock" + "(Level ?)"
-                    + "\n" + "? - Start a tour unlock" + "(Level ?)"
-                    + "\n" + "0 - Back to main menu"
-            );
-            int userShopChoice = keyboardInput.nextInt();
-            if (userShopChoice == 1) {
-                shopSpeakers();
-            } else if (userShopChoice == 2) {
-                shopEquipment();
-            } else if (userShopChoice == 0) {
-                break;
-            } else {
-                System.out.println("\n" + "Invalid command!");
-            }
-        }
-
-    }
-
-    public void shopSpeakers() {
-    }
-
-    public void shopEquipment() {
-
     }
 }

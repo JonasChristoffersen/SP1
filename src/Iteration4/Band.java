@@ -144,10 +144,11 @@ public class Band {
         if (bandCurrentFans <= 0) {
             isBandActive = false;
             System.out.println("""
+                [1;31m
                 ┏━╸┏━┓┏┳┓┏━╸   ┏━┓╻ ╻┏━╸┏━┓╻
                 ┃╺┓┣━┫┃┃┃┣╸    ┃ ┃┃┏┛┣╸ ┣┳┛╹
                 ┗━┛╹ ╹╹ ╹┗━╸   ┗━┛┗┛ ┗━╸╹┗╸╹
-                """
+                [0m"""
             );
             System.exit(0);
         }
