@@ -6,22 +6,22 @@ public class GameLoop {
     //Creation of a scanner class
     Scanner keyboardInput = new Scanner(System.in);
 
-    //GameLogic class
+    //Needed classes
     GameLogic gameLogic = new GameLogic();
 
     //Invalid command text method
     public void invalidCommandText() {
-        System.out.println("\n" + "Invalid command!" + "\n");
+        System.out.println("\n" + "Invalid command!");
     }
 
     public void welcomeMessage(Band band) {
         //First ever print user will see after running the program
         System.out.println("""
-                
+                [1;35m
                 ╻ ╻┏━╸╻  ┏━╸┏━┓┏┳┓┏━╸   ╺┳╸┏━┓   ┏┓ ┏━┓┏┓╻╺┳┓   ┏━┓╻┏┳┓╻\s
                 ┃╻┃┣╸ ┃  ┃  ┃ ┃┃┃┃┣╸     ┃ ┃ ┃   ┣┻┓┣━┫┃┗┫ ┃┃   ┗━┓┃┃┃┃╹\s
                 ┗┻┛┗━╸┗━╸┗━╸┗━┛╹ ╹┗━╸    ╹ ┗━┛   ┗━┛╹ ╹╹ ╹╺┻┛   ┗━┛╹╹ ╹╹\s
-                ╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━╸╺━
+                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
                 """
         );
 
@@ -37,21 +37,7 @@ public class GameLoop {
                 System.out.println("\n" + "What do you want to name your band?");
                 String bandRename = keyboardInput.nextLine();
                 band.setBandName(bandRename);
-                while (true) {
-                    System.out.println("\n" + "What do genre should your band play?"
-                            + "\n" + "You can choose between: Rock, Electronic, Pop and Hiphop"
-                    );
-                    String bandGenreChoice = keyboardInput.nextLine();
-                    if (bandGenreChoice.equalsIgnoreCase("rock")
-                            || bandGenreChoice.equalsIgnoreCase("electronic")
-                            || bandGenreChoice.equalsIgnoreCase("pop")
-                            || bandGenreChoice.equalsIgnoreCase("hiphop")) {
-                        band.setBandMusicGenre(bandGenreChoice);
-                        break;
-                    } else {
-                        invalidCommandText();
-                    }
-                }
+                bandGenreChoice(band);
                 break;
             } else if (userAnswer.equalsIgnoreCase("n")) {
                 break;
@@ -61,42 +47,43 @@ public class GameLoop {
         }
     }
 
+    public void bandGenreChoice(Band band) {
+        while (true) {
+            System.out.println("\n" + "What do genre should your band play?"
+                    + "\n" + "You can choose between: Rock, Electronic, Pop and Hiphop"
+            );
+            String bandGenreChoice = keyboardInput.nextLine();
+            if (bandGenreChoice.equalsIgnoreCase("rock")
+                    || bandGenreChoice.equalsIgnoreCase("electronic")
+                    || bandGenreChoice.equalsIgnoreCase("pop")
+                    || bandGenreChoice.equalsIgnoreCase("hiphop")) {
+                band.setBandMusicGenre(bandGenreChoice);
+                break;
+            } else {
+                invalidCommandText();
+            }
+        }
+    }
+        //showMainMenu
     public void showMainMenu(Band band) {
         while (true) {
             System.out.println("""
                     
-                    ====== MAIN MENU ======
-                    What do you wanna do next?
+                    ====== 🔶 MAIN MENU 🔶 ======
+                    Are you ready to start your journey?
                     (Type the number of an action listed below)
-                    1 - Band stats
-                    2 - Start game
-                    3 - Shop
-                    0 - Exit game"""
+                    1 - 🚀 Start game
+                    2 - 🟡 Help/Info (NOT CREATED YET)
+                    0 - ❌ Exit game"""
             );
             int mainMenuChoice = keyboardInput.nextInt();
             if (mainMenuChoice == 1) {
-                gameLogic.bandStats(band);
-            } else if (mainMenuChoice == 2) {
                 gameLogic.startGame(band);
-            } else if (mainMenuChoice == 3) {
-                gameLogic.shop(band);
             } else if (mainMenuChoice == 0) {
                 System.exit(0);
             } else {
                 invalidCommandText();
             }
         }
-    }
-
-
-    //GAME OVER text method
-    public void gameOver() {
-        System.out.println("""
-                ┏━╸┏━┓┏┳┓┏━╸   ┏━┓╻ ╻┏━╸┏━┓╻
-                ┃╺┓┣━┫┃┃┃┣╸    ┃ ┃┃┏┛┣╸ ┣┳┛╹
-                ┗━┛╹ ╹╹ ╹┗━╸   ┗━┛┗┛ ┗━╸╹┗╸╹
-                """
-        );
-        System.exit(0);
     }
 }
