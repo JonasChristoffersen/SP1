@@ -13,6 +13,7 @@ public class Main {
 
         //RandomEvents class is created and is ready to be used!
         //Im thinking that the class should be executed after a concert or tour (Maybe multiple during a tour)
+        //Fix XP for leveling up! Seems broken with current selection for new player!
 
 
 
