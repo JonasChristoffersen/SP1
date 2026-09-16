@@ -13,10 +13,11 @@ public class Main {
     }
 }
 //---------------------------------------------------------------------------------------------------------------------
-//Things that needs to be added before project is done:
-//RandomEvents class is created and is ready to be used!
-//Im thinking that the class should be executed after a concert or tour (Maybe multiple during a tour)
-//Rival band to compare stats and so on...
+//TODO: Things that needs to be added before project is done:
+// - RandomEvents class is created and is ready to be used!
+// - Im thinking that the class should be executed after a concert or tour (Maybe multiple during a tour)
+// - Rival band to compare stats and so on...
+// - Create decision tree for the project
 //---------------------------------------------------------------------------------------------------------------------
 //Known issues:
 //When playing the game, its possible to reach above level 5! + Max fans is not shown currently! + Fan procent is bugged!
