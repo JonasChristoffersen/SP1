@@ -100,7 +100,7 @@ public class GameLogic {
         } else {
             System.out.println("""
                     
-                    ====== 🎵 BAND SIM 🎵 ======
+                    ====== 🎤 BAND SIM 🎤 ======
                     (Type the number of an action listed below)
                     1 - 📝 Band stats
                     2 - 🎸 Play a concert/tour
@@ -153,26 +153,34 @@ public class GameLogic {
             int concertUserChoice = keyboardInput.nextInt();
             if (concertUserChoice == 1 && isVenueUnlocked(band, 1)) {
                 venueLogic.smallVenue(band);
+                venueLogic.printSingleConcert(band);
             } else if (concertUserChoice == 2 && isVenueUnlocked(band, 2)) {
                 venueLogic.mediumVenue(band);
+                venueLogic.printSingleConcert(band);
             } else if (concertUserChoice == 3 && isVenueUnlocked(band, 3)) {
                 venueLogic.largeVenue(band);
+                venueLogic.printSingleConcert(band);
             } else if (concertUserChoice == 4 && isVenueUnlocked(band, 1000)) { //SHOP LOGIC MISSING!
                 venueLogic.stadiumConcert(band);
+                venueLogic.printSingleConcert(band);
             } else if (concertUserChoice == 5 && isVenueUnlocked(band, 2)) {
                 venueLogic.festivalSmallStage(band);
+                venueLogic.printSingleConcert(band);
             } else if (concertUserChoice == 6 && isVenueUnlocked(band, 3)) {
                 venueLogic.festivalMediumStage(band);
+                venueLogic.printSingleConcert(band);
             } else if (concertUserChoice == 7 && isVenueUnlocked(band, 4)) {
                 venueLogic.festivalLargeStage(band);
+                venueLogic.printSingleConcert(band);
             } else if (concertUserChoice == 8 && isVenueUnlocked(band, 5)) {
                 venueLogic.festivalMainStage(band);
+                venueLogic.printSingleConcert(band);
             } else if (concertUserChoice == 9 && isVenueUnlocked(band, 1000)) { //SHOP LOGIC MISSING!
                 venueLogic.startTour(band);
             } else if (concertUserChoice == 0) {
                 break;
             } else {
-                System.out.println("\n" + "Invalid command!");
+                System.out.println("\n" + "Not unlocked yet or Invalid command!");
             }
         }
 

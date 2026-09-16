@@ -173,15 +173,15 @@ public class Band {
 
     public int xpThreshold() {
         if (bandFameLevel == 1) {
-            return 10000;
+            return 3500;
         } else if (bandFameLevel == 2) {
-            return 25000;
+            return 7500;
         } else if (bandFameLevel == 3) {
-            return 50000;
+            return 12500;
         } else if (bandFameLevel == 4) {
-            return 100000;
+            return 20000;
         } else if (bandFameLevel == 5) {
-            return 250000;
+            return 30000;
         } else {
             return 0;
         }
