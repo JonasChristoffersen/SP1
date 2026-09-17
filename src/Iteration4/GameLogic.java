@@ -9,6 +9,7 @@ public class GameLogic {
     //Needed classes
     VenueLogic venueLogic = new VenueLogic();
     Shop shop = new Shop();
+    RandomEvents randomEvents = new RandomEvents();
 
     //This class is thought to serve logics like if statements and so on regarding the game!
 
@@ -136,36 +137,49 @@ public class GameLogic {
             if (concertUserChoice == 1 && isVenueUnlocked(myBand, 1)) {
                 venueLogic.smallVenue(myBand, rivalBand);
                 venueLogic.printSingleConcert(myBand);
+                executeRandomEvent(myBand, rivalBand);
             } else if (concertUserChoice == 2 && isVenueUnlocked(myBand, 2)) {
                 venueLogic.mediumVenue(myBand, rivalBand);
                 venueLogic.printSingleConcert(myBand);
+                executeRandomEvent(myBand, rivalBand);
             } else if (concertUserChoice == 3 && isVenueUnlocked(myBand, 3)) {
                 venueLogic.largeVenue(myBand, rivalBand);
                 venueLogic.printSingleConcert(myBand);
+                executeRandomEvent(myBand, rivalBand);
             } else if (concertUserChoice == 4 && isVenueUnlocked(myBand, 1000)) { //SHOP LOGIC MISSING!
                 venueLogic.stadiumConcert(myBand, rivalBand);
                 venueLogic.printSingleConcert(myBand);
+                executeRandomEvent(myBand, rivalBand);
             } else if (concertUserChoice == 5 && isVenueUnlocked(myBand, 2)) {
                 venueLogic.festivalSmallStage(myBand, rivalBand);
                 venueLogic.printSingleConcert(myBand);
+                executeRandomEvent(myBand, rivalBand);
             } else if (concertUserChoice == 6 && isVenueUnlocked(myBand, 3)) {
                 venueLogic.festivalMediumStage(myBand, rivalBand);
                 venueLogic.printSingleConcert(myBand);
+                executeRandomEvent(myBand, rivalBand);
             } else if (concertUserChoice == 7 && isVenueUnlocked(myBand, 4)) {
                 venueLogic.festivalLargeStage(myBand, rivalBand);
                 venueLogic.printSingleConcert(myBand);
+                executeRandomEvent(myBand, rivalBand);
             } else if (concertUserChoice == 8 && isVenueUnlocked(myBand, 5)) {
                 venueLogic.festivalMainStage(myBand, rivalBand);
                 venueLogic.printSingleConcert(myBand);
+                executeRandomEvent(myBand, rivalBand);
             } else if (concertUserChoice == 9 && isVenueUnlocked(myBand, 1000)) { //SHOP LOGIC MISSING!
                 venueLogic.startTour(myBand, rivalBand);
+                executeRandomEvent(myBand, rivalBand);
             } else if (concertUserChoice == 0) {
                 break;
             } else {
                 System.out.println("\n" + "Not unlocked yet or Invalid command!");
             }
         }
+    }
 
+    public void executeRandomEvent(Band myBand, Band rivalBand) {
+        randomEvents.randomEventLogic(rivalBand);
+        randomEvents.randomEventPrint(myBand);
     }
 
     public String getVenueStatus(boolean isVenueUnlocked) {
