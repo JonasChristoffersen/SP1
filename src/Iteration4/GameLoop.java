@@ -4,26 +4,30 @@ import java.util.Scanner;
 
 public class GameLoop {
     //Creation of a scanner class
-    Scanner keyboardInput = new Scanner(System.in);
+    private Scanner keyboardInput;
 
     //Needed classes
-    GameLogic gameLogic = new GameLogic();
+    private GameLogic gameLogic;
+    private Band myBand;
+    private Band rivalBand;
+    private GamePrinter gamePrinter;
+
+    public GameLoop(Scanner keyboardInput, GameLogic gameLogic, GamePrinter gamePrinter, Band myBand, Band rivalBand) {
+        this.keyboardInput = keyboardInput;
+        this.gameLogic = gameLogic;
+        this.myBand = myBand;
+        this.rivalBand = rivalBand;
+        this.gamePrinter = gamePrinter;
+    }
 
     //Invalid command text method
     public void invalidCommandText() {
         System.out.println("\n" + "Invalid command!");
     }
 
-    public void welcomeMessage(Band band) {
+    public void welcomeMessage() {
         //First ever print user will see after running the program
-        System.out.println("""
-                [1;35m
-                ╻ ╻┏━╸╻  ┏━╸┏━┓┏┳┓┏━╸   ╺┳╸┏━┓   ┏┓ ┏━┓┏┓╻╺┳┓   ┏━┓╻┏┳┓╻\s
-                ┃╻┃┣╸ ┃  ┃  ┃ ┃┃┃┃┣╸     ┃ ┃ ┃   ┣┻┓┣━┫┃┗┫ ┃┃   ┗━┓┃┃┃┃╹\s
-                ┗┻┛┗━╸┗━╸┗━╸┗━┛╹ ╹┗━╸    ╹ ┗━┛   ┗━┛╹ ╹╹ ╹╺┻┛   ┗━┛╹╹ ╹╹\s
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
-                """
-        );
+        gamePrinter.printWelcomeMessage();
 
         //Read input from user + logic regarding users choice
         while (true) {
@@ -36,8 +40,8 @@ public class GameLoop {
             if (userAnswer.equalsIgnoreCase("y")) {
                 System.out.println("\n" + "What do you want to name your band?");
                 String bandRename = keyboardInput.nextLine();
-                band.setBandName(bandRename);
-                bandGenreChoice(band);
+                myBand.setBandName(bandRename);
+                bandGenreChoice();
                 break;
             } else if (userAnswer.equalsIgnoreCase("n")) {
                 break;
@@ -47,7 +51,7 @@ public class GameLoop {
         }
     }
 
-    public void bandGenreChoice(Band band) {
+    public void bandGenreChoice() {
         while (true) {
             System.out.println("\n" + "What do genre should your band play?"
                     + "\n" + "You can choose between: Rock, Electronic, Pop and Hiphop"
@@ -57,7 +61,7 @@ public class GameLoop {
                     || bandGenreChoice.equalsIgnoreCase("electronic")
                     || bandGenreChoice.equalsIgnoreCase("pop")
                     || bandGenreChoice.equalsIgnoreCase("hiphop")) {
-                band.setBandMusicGenre(bandGenreChoice);
+                myBand.setBandMusicGenre(bandGenreChoice);
                 break;
             } else {
                 invalidCommandText();
@@ -65,7 +69,7 @@ public class GameLoop {
         }
     }
         //showMainMenu
-    public void showMainMenu(Band band) {
+    public void showMainMenu() {
         while (true) {
 
             //Exception handling
@@ -81,7 +85,7 @@ public class GameLoop {
             );
             int mainMenuChoice = keyboardInput.nextInt();
             if (mainMenuChoice == 1) {
-                gameLogic.startGame(band);
+                gameLogic.startGame(myBand, rivalBand);
             } else if (mainMenuChoice == 0) {
                 System.exit(0);
             } else {

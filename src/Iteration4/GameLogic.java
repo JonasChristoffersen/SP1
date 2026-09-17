@@ -1,36 +1,14 @@
 package Iteration4;
 
-import javax.swing.plaf.IconUIResource;
 import java.util.Scanner;
 
 public class GameLogic {
     //Creation of a scanner class
     Scanner keyboardInput = new Scanner(System.in);
 
-    //Needed class
+    //Needed classes
     VenueLogic venueLogic = new VenueLogic();
     Shop shop = new Shop();
-
-    //Exception handler for int
-    int userInputInt;
-    public void exceptionHandlerInt() {
-        //keyboardInput.next();
-        try {
-            userInputInt = keyboardInput.nextInt();
-        } catch (Exception e) {
-            System.out.println("Error: exceptionHandlerInt could not process input correctly");
-        }
-    }
-    //Exception handler for String
-    String userInputString;
-    public void exceptionHandlerString() {
-        //keyboardInput.next();
-        try {
-            userInputString = keyboardInput.nextLine();
-        } catch (Exception e) {
-            System.out.println("Error: exceptionHandlerString could not process input correctly");
-        }
-    }
 
     //This class is thought to serve logics like if statements and so on regarding the game!
 
@@ -44,7 +22,6 @@ public class GameLogic {
                     + "\n" + "Status: " + band.getStatusTitle(band.getBandFameLevel())
                     + "\n" + "Fans: " + band.getBandCurrentFans() + "/" + band.bandMaxFans(band.getBandFameLevel())
                     + " (" + band.getFanPercentage() + "%)"
-                    + "\n" + "Fan base: " + band.getFanPercentage() + "% of venue capacity"
                     + "\n" + "XP: " + band.getBandXP()
                     + "\n" + "Money: $" + band.getBandCurrentBalance()
                     + "\n" + "Active: " + band.isBandActive()
@@ -52,16 +29,19 @@ public class GameLogic {
     }
 
 
-    public void startGame(Band band) {
+    public void startGame(Band myBand, Band rivalBand) {
         while (true) {
             gameMenuMessages();
             int userGameChoice = keyboardInput.nextInt();
             if (userGameChoice  == 1) {
-                bandStats(band);
+                bandStats(myBand);
             } else if (userGameChoice  == 2) {
-                playConcert(band);
+                playConcert(myBand, rivalBand);
             } else if (userGameChoice  == 3) {
-                shop.shopMenu(band);
+                shop.shopMenu(myBand);
+            } else if (userGameChoice == 4) {
+                bandStats(myBand);
+                bandStats(rivalBand);
             } else if (userGameChoice  == 0) {
                 exitConfirmationLoop();
             } else {
@@ -95,6 +75,7 @@ public class GameLogic {
                     1 - 📝 Band stats
                     2 - 🎸 Play a concert/tour
                     3 - 🛒 Shop
+                    4 - 🆚 Compare your band to rival (NOT CREATED)
                     0 - ❌ Exit game"""
             );
         } else {
@@ -105,6 +86,7 @@ public class GameLogic {
                     1 - 📝 Band stats
                     2 - 🎸 Play a concert/tour
                     3 - 🛒 Shop
+                    4 - 🆚 Compare your band to rival (NOT CREATED)
                     0 - ❌ Exit game"""
             );
         }
@@ -130,53 +112,53 @@ public class GameLogic {
         }
     }
 
-    public void playConcert(Band band) {
+    public void playConcert(Band myBand, Band rivalBand) {
         while (true) {
             //Print of options
             System.out.println("\n" + "====== 🎸 PLAY A CONCERT/TOUR 🎸 ======"
-                    + "\n" + band.getBandName() + " is setting up arrangements..."
+                    + "\n" + myBand.getBandName() + " is setting up arrangements..."
                     + "\n" + "What kind of event should they be looking for?"
                     + "\n" + "(Type the number of an action listed below)"
                     + "\n" + "1 - Small venue (Unlocked ✅ - Fame level 1)"
-                    + "\n" + "2 - Medium Venue (" + getVenueStatus(isVenueUnlocked(band, 2)) + " - Fame level 2)"
-                    + "\n" + "3 - Large Venue (" + getVenueStatus(isVenueUnlocked(band, 3)) + " - Fame level 3)"
+                    + "\n" + "2 - Medium Venue (" + getVenueStatus(isVenueUnlocked(myBand, 2)) + " - Fame level 2)"
+                    + "\n" + "3 - Large Venue (" + getVenueStatus(isVenueUnlocked(myBand, 3)) + " - Fame level 3)"
                     + "\n" + "4 - Stadium concert (" + "Locked 🔒" + " - Visit the shop)"
-                    + "\n" + "5 - Festival small stage (" + getVenueStatus(isVenueUnlocked(band, 3)) + " - Fame level 2)"
-                    + "\n" + "6 - Festival medium stage (" + getVenueStatus(isVenueUnlocked(band, 4)) + " - Fame level 3)"
-                    + "\n" + "7 - Festival Large Stage (" + getVenueStatus(isVenueUnlocked(band, 4)) +" - Fame level 4)"
-                    + "\n" + "8 - Festival main stage (" + getVenueStatus(isVenueUnlocked(band, 5)) + " - Fame level 5)"
+                    + "\n" + "5 - Festival small stage (" + getVenueStatus(isVenueUnlocked(myBand, 3)) + " - Fame level 2)"
+                    + "\n" + "6 - Festival medium stage (" + getVenueStatus(isVenueUnlocked(myBand, 4)) + " - Fame level 3)"
+                    + "\n" + "7 - Festival Large Stage (" + getVenueStatus(isVenueUnlocked(myBand, 4)) +" - Fame level 4)"
+                    + "\n" + "8 - Festival main stage (" + getVenueStatus(isVenueUnlocked(myBand, 5)) + " - Fame level 5)"
                     + "\n" + "9 - Start a tour (" + "Locked 🔒" + " - Visit the shop)"
                     + "\n" + "0 - Cancel, go back to main menu"
             );
 
             //BE AWARE THAT LOGIC FOR LOCKED CONCERTS THAT NEEDS TO BE BOUGHT IN SHOP IS NOT CREATED/IMPLEMENTED YET!
             int concertUserChoice = keyboardInput.nextInt();
-            if (concertUserChoice == 1 && isVenueUnlocked(band, 1)) {
-                venueLogic.smallVenue(band);
-                venueLogic.printSingleConcert(band);
-            } else if (concertUserChoice == 2 && isVenueUnlocked(band, 2)) {
-                venueLogic.mediumVenue(band);
-                venueLogic.printSingleConcert(band);
-            } else if (concertUserChoice == 3 && isVenueUnlocked(band, 3)) {
-                venueLogic.largeVenue(band);
-                venueLogic.printSingleConcert(band);
-            } else if (concertUserChoice == 4 && isVenueUnlocked(band, 1000)) { //SHOP LOGIC MISSING!
-                venueLogic.stadiumConcert(band);
-                venueLogic.printSingleConcert(band);
-            } else if (concertUserChoice == 5 && isVenueUnlocked(band, 2)) {
-                venueLogic.festivalSmallStage(band);
-                venueLogic.printSingleConcert(band);
-            } else if (concertUserChoice == 6 && isVenueUnlocked(band, 3)) {
-                venueLogic.festivalMediumStage(band);
-                venueLogic.printSingleConcert(band);
-            } else if (concertUserChoice == 7 && isVenueUnlocked(band, 4)) {
-                venueLogic.festivalLargeStage(band);
-                venueLogic.printSingleConcert(band);
-            } else if (concertUserChoice == 8 && isVenueUnlocked(band, 5)) {
-                venueLogic.festivalMainStage(band);
-                venueLogic.printSingleConcert(band);
-            } else if (concertUserChoice == 9 && isVenueUnlocked(band, 1000)) { //SHOP LOGIC MISSING!
-                venueLogic.startTour(band);
+            if (concertUserChoice == 1 && isVenueUnlocked(myBand, 1)) {
+                venueLogic.smallVenue(myBand, rivalBand);
+                venueLogic.printSingleConcert(myBand);
+            } else if (concertUserChoice == 2 && isVenueUnlocked(myBand, 2)) {
+                venueLogic.mediumVenue(myBand, rivalBand);
+                venueLogic.printSingleConcert(myBand);
+            } else if (concertUserChoice == 3 && isVenueUnlocked(myBand, 3)) {
+                venueLogic.largeVenue(myBand, rivalBand);
+                venueLogic.printSingleConcert(myBand);
+            } else if (concertUserChoice == 4 && isVenueUnlocked(myBand, 1000)) { //SHOP LOGIC MISSING!
+                venueLogic.stadiumConcert(myBand, rivalBand);
+                venueLogic.printSingleConcert(myBand);
+            } else if (concertUserChoice == 5 && isVenueUnlocked(myBand, 2)) {
+                venueLogic.festivalSmallStage(myBand, rivalBand);
+                venueLogic.printSingleConcert(myBand);
+            } else if (concertUserChoice == 6 && isVenueUnlocked(myBand, 3)) {
+                venueLogic.festivalMediumStage(myBand, rivalBand);
+                venueLogic.printSingleConcert(myBand);
+            } else if (concertUserChoice == 7 && isVenueUnlocked(myBand, 4)) {
+                venueLogic.festivalLargeStage(myBand, rivalBand);
+                venueLogic.printSingleConcert(myBand);
+            } else if (concertUserChoice == 8 && isVenueUnlocked(myBand, 5)) {
+                venueLogic.festivalMainStage(myBand, rivalBand);
+                venueLogic.printSingleConcert(myBand);
+            } else if (concertUserChoice == 9 && isVenueUnlocked(myBand, 1000)) { //SHOP LOGIC MISSING!
+                venueLogic.startTour(myBand, rivalBand);
             } else if (concertUserChoice == 0) {
                 break;
             } else {
@@ -194,7 +176,7 @@ public class GameLogic {
         }
     }
 
-    public boolean isVenueUnlocked(Band band, int requiredFameLevel) {
-        return band.getBandFameLevel() >= requiredFameLevel;
+    public boolean isVenueUnlocked(Band myBand, int requiredFameLevel) {
+        return myBand.getBandFameLevel() >= requiredFameLevel;
     }
 }
