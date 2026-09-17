@@ -3,8 +3,8 @@ package Iteration4;
 import java.util.Random;
 
 public class RandomEvents {
-    String eventMessage;
-    int randomEventFanValue;
+    private String eventMessage;
+    private int randomEventFanValue;
 
     public void randomEventLogic(Band band) {
         int[] eventType = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -53,12 +53,13 @@ public class RandomEvents {
         }
     }
 
-    public void randomEventPrint(Band band) {
-        randomEventLogic(band);
-        System.out.println("\n" + "====== RANDOM EVENT ======"
-                + "\n" + eventMessage
-                + "\n" + (band.getBandCurrentFans() - randomEventFanValue) + " -> " + band.getBandCurrentFans()
-        );
+    public String getEventMessage() {
+        return eventMessage;
     }
+
+    public int getRandomEventFanValue() {
+        return randomEventFanValue;
+    }
+
 }
 

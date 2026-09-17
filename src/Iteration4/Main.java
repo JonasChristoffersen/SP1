@@ -10,16 +10,18 @@ public class Main {
         Band rivalBand = new Band();
         GameLogic gameLogic = new GameLogic();
         GamePrinter gamePrinter = new GamePrinter();
-        GameLoop gameLoop = new GameLoop(keyboardInput, gameLogic, gamePrinter, myBand, rivalBand);
+        VenueLogic venueLogic = new VenueLogic();
+        Shop shop = new Shop();
+        RandomEvents randomEvents = new RandomEvents();
+
+        GameLoop gameLoop = new GameLoop(keyboardInput, gameLogic, gamePrinter, venueLogic, shop, randomEvents,
+                myBand, rivalBand);
 
         //Calls of other methods
         gameLoop.welcomeMessage();
-        gameLoop.showMainMenu();
+        gameLoop.showStartMenu();
     }
 }
-//---------------------------------------------------------------------------------------------------------------------
-//TODO: Things that needs to be added before project is done:
-// - RandomEvents class is created and is ready to be used!
 //---------------------------------------------------------------------------------------------------------------------
 //Known issues:
 //When playing the game, its possible to reach above level 5! + Max fans is not shown currently! + Fan procent is bugged!

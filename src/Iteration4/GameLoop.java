@@ -11,34 +11,35 @@ public class GameLoop {
     private Band myBand;
     private Band rivalBand;
     private GamePrinter gamePrinter;
+    private VenueLogic venueLogic;
+    private Shop shop;
+    private RandomEvents randomEvents;
 
-    public GameLoop(Scanner keyboardInput, GameLogic gameLogic, GamePrinter gamePrinter, Band myBand, Band rivalBand) {
+
+    public GameLoop(Scanner keyboardInput, GameLogic gameLogic, GamePrinter gamePrinter, VenueLogic venueLogic,
+                    Shop shop, RandomEvents randomEvents, Band myBand, Band rivalBand) {
         this.keyboardInput = keyboardInput;
         this.gameLogic = gameLogic;
+        this.gamePrinter = gamePrinter;
+        this.venueLogic = venueLogic;
+        this.shop = shop;
+        this.randomEvents = randomEvents;
         this.myBand = myBand;
         this.rivalBand = rivalBand;
-        this.gamePrinter = gamePrinter;
-    }
 
-    //Invalid command text method
-    public void invalidCommandText() {
-        System.out.println("\n" + "Invalid command!");
     }
 
     public void welcomeMessage() {
         //First ever print user will see after running the program
         gamePrinter.printWelcomeMessage();
-
         //Read input from user + logic regarding users choice
         while (true) {
             //First choice user is presented with
-            System.out.println("Do you wish to create your own band, or roll with a default option?"
-                            + "\n" + "(Y = Yes, i want to create my own band) (N = No, just roll the default option)"
-            );
+            gamePrinter.printDoUserWantToRenameBand();
             String userAnswer = keyboardInput.nextLine();
             //Logic for renaming the band or not
             if (userAnswer.equalsIgnoreCase("y")) {
-                System.out.println("\n" + "What do you want to name your band?");
+                gamePrinter.printRenameBandQuestion();
                 String bandRename = keyboardInput.nextLine();
                 myBand.setBandName(bandRename);
                 bandGenreChoice();
@@ -46,16 +47,15 @@ public class GameLoop {
             } else if (userAnswer.equalsIgnoreCase("n")) {
                 break;
             } else {
-                invalidCommandText();
+                gamePrinter.printInvalidCommandText();
             }
         }
     }
 
     public void bandGenreChoice() {
         while (true) {
-            System.out.println("\n" + "What do genre should your band play?"
-                    + "\n" + "You can choose between: Rock, Electronic, Pop and Hiphop"
-            );
+            //User gets choose band using the scanner object
+            gamePrinter.printGenreBandQuestion();
             String bandGenreChoice = keyboardInput.nextLine();
             if (bandGenreChoice.equalsIgnoreCase("rock")
                     || bandGenreChoice.equalsIgnoreCase("electronic")
@@ -64,33 +64,45 @@ public class GameLoop {
                 myBand.setBandMusicGenre(bandGenreChoice);
                 break;
             } else {
-                invalidCommandText();
+                gamePrinter.printInvalidCommandText();
             }
         }
     }
-        //showMainMenu
-    public void showMainMenu() {
-        while (true) {
 
-            //Exception handling
-            //Local variable set to 50, to make sure it won't hit any if statement
-            System.out.println("""
-                    
-                    ====== 🔶 MAIN MENU 🔶 ======
-                    Are you ready to start your journey?
-                    (Type the number of an action listed below)
-                    1 - 🚀 Start game
-                    2 - 🟡 Help/Info (NOT CREATED YET)
-                    0 - ❌ Exit game"""
-            );
+    public void showStartMenu() {
+        while (true) {
+            gamePrinter.printStartMenu();
             int mainMenuChoice = keyboardInput.nextInt();
             if (mainMenuChoice == 1) {
-                gameLogic.startGame(myBand, rivalBand);
+                startGame();
             } else if (mainMenuChoice == 0) {
                 System.exit(0);
             } else {
-                invalidCommandText();
+                gamePrinter.printInvalidCommandText();
             }
         }
     }
+
+    public void startGame() {
+        while (true) {
+            gameLogic.gameMenuMessages(gamePrinter);
+            int userGameChoice = keyboardInput.nextInt();
+            if (userGameChoice  == 1) {
+                gamePrinter.printBandStats(myBand);
+            } else if (userGameChoice  == 2) {
+                gameLogic.playConcert(myBand, rivalBand, venueLogic, randomEvents, gamePrinter, gameLogic);
+            } else if (userGameChoice  == 3) {
+                shop.shopMenu(myBand);
+            } else if (userGameChoice == 4) {
+                gamePrinter.printBandStats(myBand);
+                gamePrinter.printBandStats(rivalBand);
+            } else if (userGameChoice  == 0) {
+                gameLogic.exitConfirmationLoop(gamePrinter);
+            } else {
+                gamePrinter.printInvalidCommandText();
+            }
+        }
+    }
+
+
 }
