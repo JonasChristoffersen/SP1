@@ -3,10 +3,8 @@ package Iteration4;
 import java.util.Scanner;
 
 public class GameLoop {
-    //Creation of a scanner class
+    //Classes
     private Scanner keyboardInput;
-
-    //Needed classes
     private GameLogic gameLogic;
     private Band myBand;
     private Band rivalBand;

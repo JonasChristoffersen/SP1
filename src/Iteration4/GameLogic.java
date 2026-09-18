@@ -38,7 +38,7 @@ public class GameLogic {
             } else if (userExitInput.equalsIgnoreCase("n")) {
                 break;
             } else {
-                System.out.println("Invalid command!");
+                gamePrinter.printInvalidCommandText();
             }
         }
     }
@@ -89,7 +89,7 @@ public class GameLogic {
             } else if (concertUserChoice == 0) {
                 break;
             } else {
-                System.out.println("\n" + "Not unlocked yet or Invalid command!");
+                gamePrinter.printNotUnlockedOrInvalidText();
             }
         }
     }

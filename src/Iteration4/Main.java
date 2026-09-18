@@ -23,6 +23,8 @@ public class Main {
     }
 }
 //---------------------------------------------------------------------------------------------------------------------
+//Maybe add "Admin" user settings if user inputs admin as band name when starting the game
+//---------------------------------------------------------------------------------------------------------------------
 //Known issues:
 //When playing the game, its possible to reach above level 5! + Max fans is not shown currently! + Fan procent is bugged!
 //T

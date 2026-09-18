@@ -131,4 +131,10 @@ public class GamePrinter {
                 
                 Invalid command!""");
     }
+
+    public void printNotUnlockedOrInvalidText() {
+        System.out.println("""
+                
+                Invalid command!""");
+    }
 }

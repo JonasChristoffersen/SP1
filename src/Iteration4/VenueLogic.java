@@ -3,16 +3,15 @@ package Iteration4;
 import java.util.Random;
 
 public class VenueLogic {
-    Random random = new Random();
-    int venueCapacity;
-    int attendance;
-    double localEarnMoney;
-    int localGainFans;
-    int localAddXP;
-    String concertTurnout;
-    double attendancePercentage;
-    String venueName;
-
+    private Random random = new Random();
+    private int venueCapacity;
+    private int attendance;
+    private double localEarnMoney;
+    private int localGainFans;
+    private int localAddXP;
+    private String concertTurnout;
+    private double attendancePercentage;
+    private String venueName;
 
     public void concertOutcomeLogic() {
         attendancePercentage = (double) attendance / venueCapacity * 100;
