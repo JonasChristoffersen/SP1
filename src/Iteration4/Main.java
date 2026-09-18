@@ -53,3 +53,5 @@ public class Main {
 //When reaching max fans, it is not displayed anywhere!
 
 //XP system seems to be broken when playing concerts!
+
+//If user don't choose a band name, the band name is the same as rival band!

@@ -3,17 +3,15 @@ package Iteration4;
 import java.util.Scanner;
 
 public class Shop {
-    //Creation of a scanner class
-    Scanner keyboardInput = new Scanner(System.in);
 
-    public void shopMenu(Band band, GamePrinter gamePrinter) {
+    public void shopMenu(Band myBand, GamePrinter gamePrinter, Scanner keyboardInput) {
         while (true) {
             gamePrinter.printShopMenu();
             int userShopChoice = keyboardInput.nextInt(); //CHECK UP ON THIS
             if (userShopChoice == 1) {
-                shopSpeakers(band);
+                shopSpeakers(myBand);
             } else if (userShopChoice == 2) {
-                shopEquipment(band);
+                shopEquipment(myBand);
             } else if (userShopChoice == 0) {
                 break;
             } else {
@@ -24,6 +22,7 @@ public class Shop {
     }
 
     public void shopSpeakers(Band band) {
+
     }
 
     public void shopEquipment(Band band) {

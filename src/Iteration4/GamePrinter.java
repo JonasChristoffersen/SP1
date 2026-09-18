@@ -59,7 +59,7 @@ public class GamePrinter {
                     1 - 📝 Band stats
                     2 - 🎸 Play a concert/tour
                     3 - 🛒 Shop
-                    4 - 🆚 Compare your band to rival (NOT CREATED)
+                    4 - 🆚 Compare your band to rival
                     0 - ❌ Exit game"""
         );
     }
@@ -72,7 +72,7 @@ public class GamePrinter {
                     1 - 📝 Band stats
                     2 - 🎸 Play a concert/tour
                     3 - 🛒 Shop
-                    4 - 🆚 Compare your band to rival (NOT CREATED)
+                    4 - 🆚 Compare your band to rival
                     0 - ❌ Exit game"""
         );
     }
@@ -90,6 +90,20 @@ public class GamePrinter {
                 + "\n" + "Money: $" + band.getBandCurrentBalance()
                 + "\n" + "Active: " + band.isBandActive()
         );
+    }
+
+    public void printCompareBandStats(Band myBand, Band rivalBand) {
+        System.out.println("====== " + myBand.getBandName() + " VS " + rivalBand.getBandName() + " ======"
+                + "\n" + myBand.getBandName() + " fans: " + myBand.getBandCurrentFans()
+                + "\n" + rivalBand.getBandName() + " fans: " + rivalBand.getBandCurrentFans()
+                + "\n" + myBand.getBandName() + " fame level: " + myBand.getBandFameLevel()
+                + "\n" + rivalBand.getBandName() + " fame level: " + rivalBand.getBandFameLevel()
+                + "\n" + myBand.getBandName() + " XP: " + myBand.getBandXP()
+                + "\n" + rivalBand.getBandName() + " XP: " + rivalBand.getBandXP()
+                + "\n" + myBand.getBandName() + " balance: $" + myBand.getBandCurrentBalance()
+                + "\n" + rivalBand.getBandName() + " balance: $" + rivalBand.getBandCurrentBalance()
+        );
+
     }
 
     public void printConcertMenu(Band myBand, GameLogic gameLogic) {

@@ -91,10 +91,9 @@ public class GameLoop {
                 gameLogic.concertMenu(myBand, rivalBand, venueLogic, randomEvents, gamePrinter,
                         gameLogic, keyboardInput);
             } else if (userGameChoice  == 3) {
-                shop.shopMenu(myBand, gamePrinter);
+                shop.shopMenu(myBand, gamePrinter, keyboardInput);
             } else if (userGameChoice == 4) {
-                gamePrinter.printBandStats(myBand);
-                gamePrinter.printBandStats(rivalBand);
+                gamePrinter.printCompareBandStats(myBand, rivalBand);
             } else if (userGameChoice  == 0) {
                 gameLogic.exitConfirmationLoop(gamePrinter, keyboardInput);
             } else {
