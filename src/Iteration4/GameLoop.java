@@ -88,14 +88,15 @@ public class GameLoop {
             if (userGameChoice  == 1) {
                 gamePrinter.printBandStats(myBand);
             } else if (userGameChoice  == 2) {
-                gameLogic.playConcert(myBand, rivalBand, venueLogic, randomEvents, gamePrinter, gameLogic);
+                gameLogic.concertMenu(myBand, rivalBand, venueLogic, randomEvents, gamePrinter,
+                        gameLogic, keyboardInput);
             } else if (userGameChoice  == 3) {
-                shop.shopMenu(myBand);
+                shop.shopMenu(myBand, gamePrinter);
             } else if (userGameChoice == 4) {
                 gamePrinter.printBandStats(myBand);
                 gamePrinter.printBandStats(rivalBand);
             } else if (userGameChoice  == 0) {
-                gameLogic.exitConfirmationLoop(gamePrinter);
+                gameLogic.exitConfirmationLoop(gamePrinter, keyboardInput);
             } else {
                 gamePrinter.printInvalidCommandText();
             }

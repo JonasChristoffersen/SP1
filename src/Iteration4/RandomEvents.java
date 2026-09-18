@@ -6,7 +6,7 @@ public class RandomEvents {
     private String eventMessage;
     private int randomEventFanValue;
 
-    public void randomEventLogic(Band band) {
+    public void randomEventLogic(Band band, GamePrinter gamePrinter) {
         int[] eventType = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int randomEventPicker = new Random().nextInt(eventType.length);
         if (eventType[randomEventPicker] == 1) {
@@ -30,8 +30,8 @@ public class RandomEvents {
             band.gainFans(randomEventFanValue);
         } else if (eventType[randomEventPicker] == 6) {
             eventMessage = "Nasty roumers are roaming about " + band.getBandName() + " (-300 fans)";
-            randomEventFanValue = -300;
-            band.loseFans(randomEventFanValue);
+            randomEventFanValue = 300;
+            band.loseFans(randomEventFanValue, gamePrinter);
         } else if (eventType[randomEventPicker] == 7) {
             eventMessage = "Social media post went well (+150 fans)";
             randomEventFanValue = 150;
@@ -42,8 +42,8 @@ public class RandomEvents {
             band.gainFans(randomEventFanValue);
         } else if (eventType[randomEventPicker] == 9) {
             eventMessage = "Bad performance at a local event. Word is spreading... (-200 fans)";
-            randomEventFanValue = -200;
-            band.gainFans(randomEventFanValue);
+            randomEventFanValue = 200;
+            band.loseFans(randomEventFanValue, gamePrinter);
         } else if (eventType[randomEventPicker] == 10) {
             eventMessage = "A famous artist mentioned " + band.getBandName() + " on social media! (+750 fans)";
             randomEventFanValue = 750;

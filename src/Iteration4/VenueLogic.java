@@ -6,9 +6,9 @@ public class VenueLogic {
     private Random random = new Random();
     private int venueCapacity;
     private int attendance;
-    private double localEarnMoney;
-    private int localGainFans;
-    private int localAddXP;
+    private double concertEarnMoney;
+    private int concertGainFans;
+    private int concertAddXP;
     private String concertTurnout;
     private double attendancePercentage;
     private String venueName;
@@ -17,103 +17,130 @@ public class VenueLogic {
         attendancePercentage = (double) attendance / venueCapacity * 100;
         if (attendancePercentage >= 80) {
             concertTurnout = "Great concert!";
-            localEarnMoney = attendance * 2.8;
-            localGainFans = (int)(attendance * 1.5);
-            localAddXP = attendance;
+            concertEarnMoney = attendance * 2.8;
+            concertGainFans = (int)(attendance * 1.5);
+            concertAddXP = attendance;
         } else if (attendancePercentage >= 50) {
             concertTurnout = "Decent concert";
-            localEarnMoney = attendance * 2.2;
-            localGainFans = (int)(attendance * 1.2);
-            localAddXP = (int) (attendance * 0.8);
+            concertEarnMoney = attendance * 2.2;
+            concertGainFans = (int)(attendance * 1.2);
+            concertAddXP = (int) (attendance * 0.8);
         } else if (attendancePercentage >= 30) {
             concertTurnout = "Okay concert...";
-            localEarnMoney = attendance * 1.8;
-            localGainFans = (int)(attendance * 0.8);
-            localAddXP = (int) (attendance * 0.5);
+            concertEarnMoney = attendance * 1.8;
+            concertGainFans = (int)(attendance * 0.8);
+            concertAddXP = (int) (attendance * 0.5);
         } else {
             concertTurnout = "Disaster!";
-            localEarnMoney = attendance * 1.5;
-            localGainFans = (int)(attendance * -0.8);
-            localAddXP = (int) (attendance * 0.3);
+            concertEarnMoney = attendance * 1.5;
+            concertGainFans = (int)(attendance * -0.8);
+            concertAddXP = (int) (attendance * 0.3);
 
         }
     }
 
-    public void printSingleConcert(Band band) {
-        //Print of result
-        System.out.println("\n" + "====== " + venueName + " ======"
-                + "\n" + "Playing at venue (capacity: " + venueCapacity + ")"
-                + "\n" + "Attendance: " + attendance + " (" + attendancePercentage + "%)"
-                + "\n" + "Turnout: " + concertTurnout
-                + "\n" + "Fans: " + (band.getBandCurrentFans() - localGainFans) + " -> " + band.getBandCurrentFans()
-                + "\n" + "Money: " + (band.getBandCurrentBalance() - localEarnMoney) + " -> " + band.getBandCurrentBalance()
-                + "\n" + "XP: " + (band.getBandXP() - localAddXP) + " -> " + band.getBandXP()
-                + "\n" + "Fame level: " + band.getBandFameLevel()
-        );
-    }
-
-    public void concertVariableLogic(Band band, int venueCap) {
+    public void concertVariableLogic(Band band) {
         //Variables for attendance and venue capacity
-        attendance = random.nextInt(101) + (venueCap - 100);
-        venueCapacity = venueCap;
+        attendance = random.nextInt(101) + (venueCapacity - 100);
         //Call of concertOutcomeLogic method
         concertOutcomeLogic();
         //Add values to band variables:
-        band.earnMoney(localEarnMoney);
-        band.gainFans(localGainFans);
+        band.earnMoney(concertEarnMoney);
+        band.gainFans(concertGainFans);
         band.addXP(attendance);
         //Check if band is active after concert
-        band.isActive();
+        //band.isActive(); //Not needed after adding this to "RandomEventLogic"
     }
 
     public void smallVenue(Band myBand, Band rivalBand) {
         venueName = "Small venue";
-        concertVariableLogic(myBand, 350);
-        concertVariableLogic(rivalBand, 350);
+        venueCapacity = 350;
+        concertVariableLogic(myBand);
+        concertVariableLogic(rivalBand);
     }
 
     public void mediumVenue(Band myBand, Band rivalBand) {
         venueName = "Medium venue";
-        concertVariableLogic(myBand, 475);
-        concertVariableLogic(rivalBand, 475);
+        venueCapacity = 475;
+        concertVariableLogic(myBand);
+        concertVariableLogic(rivalBand);
     }
 
     public void largeVenue(Band myBand, Band rivalBand) {
         venueName = "Large venue";
-        concertVariableLogic(myBand, 650);
-        concertVariableLogic(rivalBand, 650);
+        venueCapacity = 650;
+        concertVariableLogic(myBand);
+        concertVariableLogic(rivalBand);
     }
 
     public void stadiumConcert(Band myBand, Band rivalBand) {
         venueName = "Stadium concert";
-        concertVariableLogic(myBand, 1000);
-        concertVariableLogic(rivalBand, 1000);
+        venueCapacity = 1000;
+        concertVariableLogic(myBand);
+        concertVariableLogic(rivalBand);
     }
 
     public void festivalSmallStage(Band myBand, Band rivalBand) {
         venueName = "Festival small stage";
-        concertVariableLogic(myBand, 400);
-        concertVariableLogic(rivalBand, 400);
+        venueCapacity = 400;
+        concertVariableLogic(myBand);
+        concertVariableLogic(rivalBand);
     }
 
     public void festivalMediumStage(Band myBand, Band rivalBand) {
         venueName = "Festival medium stage";
-        concertVariableLogic(myBand, 525);
-        concertVariableLogic(rivalBand, 525);
+        venueCapacity = 525;
+        concertVariableLogic(myBand);
+        concertVariableLogic(rivalBand);
     }
 
     public void festivalLargeStage(Band myBand, Band rivalBand) {
         venueName = "Festival large stage";
-        concertVariableLogic(myBand, 750);
-        concertVariableLogic(rivalBand, 750);
+        venueCapacity = 750;
+        concertVariableLogic(myBand);
+        concertVariableLogic(rivalBand);
     }
 
     public void festivalMainStage(Band myBand, Band rivalBand) {
         venueName = "Festival main stage";
-        concertVariableLogic(myBand, 1500);
-        concertVariableLogic(rivalBand, 1500);
+        venueCapacity = 1500;
+        concertVariableLogic(myBand);
+        concertVariableLogic(rivalBand);
     }
 
-    public void startTour(Band myBand, Band rivalBand) {
+    public void showTourMenu(Band myBand, Band rivalBand) {
+    }
+
+    //Getters needed to provide to "GamePrinter" class
+    public String getVenueName() {
+        return venueName;
+    }
+
+    public int getVenueCapacity() {
+        return venueCapacity;
+    }
+
+    public int getAttendance() {
+        return attendance;
+    }
+
+    public double getAttendancePercentage() {
+        return attendancePercentage;
+    }
+
+    public String getConcertTurnout() {
+        return concertTurnout;
+    }
+
+    public int getConcertGainFans() {
+        return concertGainFans;
+    }
+
+    public double getConcertEarnMoney() {
+        return concertEarnMoney;
+    }
+
+    public int getConcertAddXP() {
+        return concertAddXP;
     }
 }

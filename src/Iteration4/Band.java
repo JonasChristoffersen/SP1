@@ -83,7 +83,6 @@ public class Band {
         return bandMusicGenreChar;
     }
 
-
     public String getStatusTitle(int fameLevel) {
         if (fameLevel == 1) {
             return "Unknown - Playing in garages";
@@ -131,25 +130,19 @@ public class Band {
         }
     }
 
-    public void loseFans(int amount) {
+    public void loseFans(int amount, GamePrinter gamePrinter) {
         if ((bandCurrentFans - amount) > 0) {
             bandCurrentFans -= amount;
         } else {
             bandCurrentFans -= amount;
-            isActive();
+            isActive(gamePrinter);
         }
     }
 
-    public boolean isActive() {
+    public boolean isActive(GamePrinter gamePrinter) {
         if (bandCurrentFans <= 0) {
             isBandActive = false;
-            System.out.println("""
-                [1;31m
-                ┏━╸┏━┓┏┳┓┏━╸   ┏━┓╻ ╻┏━╸┏━┓╻
-                ┃╺┓┣━┫┃┃┃┣╸    ┃ ┃┃┏┛┣╸ ┣┳┛╹
-                ┗━┛╹ ╹╹ ╹┗━╸   ┗━┛┗┛ ┗━╸╹┗╸╹
-                [0m"""
-            );
+            gamePrinter.printGameOverText();
             System.exit(0);
         }
         return isBandActive;

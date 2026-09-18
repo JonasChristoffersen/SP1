@@ -1,12 +1,8 @@
 package Iteration4;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class GameLogic {
-    //Creation of a scanner class
-    Scanner keyboardInput = new Scanner(System.in);
-
     private int count = 0;
     public boolean isFirstTimer() {
         if (count == 0) {
@@ -25,7 +21,7 @@ public class GameLogic {
         }
     }
 
-    public void exitConfirmationLoop(GamePrinter gamePrinter) {
+    public void exitConfirmationLoop(GamePrinter gamePrinter, Scanner keyboardInput) {
         //Flush of keyboardInput
         keyboardInput.nextLine();
 
@@ -33,7 +29,7 @@ public class GameLogic {
             gamePrinter.printExitConfirmationText();
             String userExitInput = keyboardInput.nextLine();
             if (userExitInput.equalsIgnoreCase("y")) {
-                System.out.println("Thanks for playing! See you soon.");
+                gamePrinter.printThanksForPlaying();
                 System.exit(0);
             } else if (userExitInput.equalsIgnoreCase("n")) {
                 break;
@@ -43,8 +39,8 @@ public class GameLogic {
         }
     }
 
-    public void playConcert(Band myBand, Band rivalBand, VenueLogic venueLogic, RandomEvents randomEvents,
-                            GamePrinter gamePrinter, GameLogic gameLogic) {
+    public void concertMenu(Band myBand, Band rivalBand, VenueLogic venueLogic, RandomEvents randomEvents,
+                            GamePrinter gamePrinter, GameLogic gameLogic, Scanner keyboardInput) {
         while (true) {
             //Print of options
             gamePrinter.printConcertMenu(myBand, gameLogic);
@@ -53,38 +49,38 @@ public class GameLogic {
             int concertUserChoice = keyboardInput.nextInt();
             if (concertUserChoice == 1 && isVenueUnlocked(myBand, 1)) {
                 venueLogic.smallVenue(myBand, rivalBand);
-                venueLogic.printSingleConcert(myBand);
+                gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
             } else if (concertUserChoice == 2 && isVenueUnlocked(myBand, 2)) {
                 venueLogic.mediumVenue(myBand, rivalBand);
-                venueLogic.printSingleConcert(myBand);
+                gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
             } else if (concertUserChoice == 3 && isVenueUnlocked(myBand, 3)) {
                 venueLogic.largeVenue(myBand, rivalBand);
-                venueLogic.printSingleConcert(myBand);
+                gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
             } else if (concertUserChoice == 4 && isVenueUnlocked(myBand, 1000)) { //SHOP LOGIC MISSING!
                 venueLogic.stadiumConcert(myBand, rivalBand);
-                venueLogic.printSingleConcert(myBand);
+                gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
             } else if (concertUserChoice == 5 && isVenueUnlocked(myBand, 2)) {
                 venueLogic.festivalSmallStage(myBand, rivalBand);
-                venueLogic.printSingleConcert(myBand);
+                gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
             } else if (concertUserChoice == 6 && isVenueUnlocked(myBand, 3)) {
                 venueLogic.festivalMediumStage(myBand, rivalBand);
-                venueLogic.printSingleConcert(myBand);
+                gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
             } else if (concertUserChoice == 7 && isVenueUnlocked(myBand, 4)) {
                 venueLogic.festivalLargeStage(myBand, rivalBand);
-                venueLogic.printSingleConcert(myBand);
+                gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
             } else if (concertUserChoice == 8 && isVenueUnlocked(myBand, 5)) {
                 venueLogic.festivalMainStage(myBand, rivalBand);
-                venueLogic.printSingleConcert(myBand);
+                gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
             } else if (concertUserChoice == 9 && isVenueUnlocked(myBand, 1000)) { //SHOP LOGIC MISSING!
-                venueLogic.startTour(myBand, rivalBand);
+                venueLogic.showTourMenu(myBand, rivalBand);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
             } else if (concertUserChoice == 0) {
                 break;
@@ -95,8 +91,9 @@ public class GameLogic {
     }
 
     public void executeRandomEvent(Band myBand, Band rivalBand, RandomEvents randomEvents, GamePrinter gamePrinter) {
-        randomEvents.randomEventLogic(rivalBand);
-        gamePrinter.printRandomEvent(myBand, randomEvents);
+        randomEvents.randomEventLogic(rivalBand, gamePrinter);
+        gamePrinter.printRandomEvent(myBand, randomEvents, gamePrinter);
+        myBand.isActive(gamePrinter);
     }
 
     public String getVenueStatus(boolean isVenueUnlocked) {

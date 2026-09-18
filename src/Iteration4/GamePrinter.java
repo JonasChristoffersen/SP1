@@ -110,8 +110,8 @@ public class GamePrinter {
         );
     }
 
-    public void printRandomEvent(Band band, RandomEvents randomEvents) {
-        randomEvents.randomEventLogic(band);
+    public void printRandomEvent(Band band, RandomEvents randomEvents, GamePrinter gamePrinter) {
+        randomEvents.randomEventLogic(band, gamePrinter);
         System.out.println("\n" + "====== RANDOM EVENT ======"
                 + "\n" + randomEvents.getEventMessage()
                 + "\n" + (band.getBandCurrentFans() - randomEvents.getRandomEventFanValue()) + " -> " + band.getBandCurrentFans()
@@ -135,7 +135,38 @@ public class GamePrinter {
     public void printNotUnlockedOrInvalidText() {
         System.out.println("""
                 
-                Invalid command!""");
+                Not unlocked yet or invalid command!""");
+    }
+
+    public void printSingleConcert(Band band, VenueLogic venueLogic) {
+        //Print of result
+        System.out.println("\n" + "====== " + venueLogic.getVenueName() + " ======"
+                + "\n" + "Playing at venue (capacity: " + venueLogic.getVenueCapacity() + ")"
+                + "\n" + "Attendance: " + venueLogic.getAttendance() + " (" + venueLogic.getAttendancePercentage() + "%)"
+                + "\n" + "Turnout: " + venueLogic.getConcertTurnout()
+                + "\n" + "Fans: " + (band.getBandCurrentFans() - venueLogic.getConcertGainFans()) + " -> " + band.getBandCurrentFans()
+                + "\n" + "Money: " + (band.getBandCurrentBalance() - venueLogic.getConcertEarnMoney()) + " -> " + band.getBandCurrentBalance()
+                + "\n" + "XP: " + (band.getBandXP() - venueLogic.getConcertAddXP()) + " -> " + band.getBandXP()
+                + "\n" + "Fame level: " + band.getBandFameLevel()
+        );
+    }
+
+    public void printThanksForPlaying() {
+        System.out.println("Thanks for playing! See you soon.");
+    }
+
+    public void printShopMenu() {
+        System.out.println("""
+                
+                ====== 🛒 SHOP 🛒 ======
+                This is the shop - Here you can buy/upgrade equipment
+                (Type the number of an item listed below, to show more details)
+                1 - Speakers (Level 0)
+                2 - Equipment (Level 0)
+                ? - Stadium concert unlock(Level ?)
+                ? - Start a tour unlock(Level ?)
+                0 - Back to main menu"""
+        );
     }
 
     //Not implemented yet/set up correctly

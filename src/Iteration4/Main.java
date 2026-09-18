@@ -50,6 +50,6 @@ public class Main {
 
 //When band loose, it is not displayed what went wrong! only "GameOver" message is shown to user!
 
-//When reaching max fans, it is not displayed anywhere +
+//When reaching max fans, it is not displayed anywhere!
 
 //XP system seems to be broken when playing concerts!
