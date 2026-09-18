@@ -137,4 +137,15 @@ public class GamePrinter {
                 
                 Invalid command!""");
     }
+
+    //Not implemented yet/set up correctly
+    public void printGameOverText() {
+        System.out.println("""
+                [1;31m
+                ┏━╸┏━┓┏┳┓┏━╸   ┏━┓╻ ╻┏━╸┏━┓╻
+                ┃╺┓┣━┫┃┃┃┣╸    ┃ ┃┃┏┛┣╸ ┣┳┛╹
+                ┗━┛╹ ╹╹ ╹┗━╸   ┗━┛┗┛ ┗━╸╹┗╸╹
+                [0m"""
+        );
+    }
 }
