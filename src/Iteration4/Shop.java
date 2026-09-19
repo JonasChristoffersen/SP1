@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Shop {
 
-    public void shopMenu(Band myBand, GamePrinter gamePrinter, Scanner keyboardInput) {
+    public void shopMenu(Band myBand, GamePrinter gamePrinter, Scanner keyboardInput, Shop shop) {
         while (true) {
-            gamePrinter.printShopMenu();
+            gamePrinter.printShopMenu(shop);
             int userShopChoice = keyboardInput.nextInt(); //CHECK UP ON THIS
             if (userShopChoice == 1) {
                 shopSpeakers(myBand);
@@ -18,7 +18,14 @@ public class Shop {
                 gamePrinter.printInvalidCommandText();
             }
         }
+    }
 
+    public int getStadiumConcertUnlockPrice() {
+        return 10000;
+    }
+
+    public int getStatATourUnlockPrice() {
+        return 25000;
     }
 
     public void shopSpeakers(Band band) {
@@ -27,4 +34,5 @@ public class Shop {
 
     public void shopEquipment(Band band) {
     }
+
 }

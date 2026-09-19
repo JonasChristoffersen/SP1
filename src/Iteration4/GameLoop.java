@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class GameLoop {
     //Classes
-    private Scanner keyboardInput;
-    private GameLogic gameLogic;
-    private Band myBand;
-    private Band rivalBand;
-    private GamePrinter gamePrinter;
-    private VenueLogic venueLogic;
-    private Shop shop;
-    private RandomEvents randomEvents;
+    private final Scanner keyboardInput;
+    private final GameLogic gameLogic;
+    private final Band myBand;
+    private final Band rivalBand;
+    private final GamePrinter gamePrinter;
+    private final VenueLogic venueLogic;
+    private final Shop shop;
+    private final RandomEvents randomEvents;
 
 
     public GameLoop(Scanner keyboardInput, GameLogic gameLogic, GamePrinter gamePrinter, VenueLogic venueLogic,
@@ -91,7 +91,7 @@ public class GameLoop {
                 gameLogic.concertMenu(myBand, rivalBand, venueLogic, randomEvents, gamePrinter,
                         gameLogic, keyboardInput);
             } else if (userGameChoice  == 3) {
-                shop.shopMenu(myBand, gamePrinter, keyboardInput);
+                shop.shopMenu(myBand, gamePrinter, keyboardInput, shop);
             } else if (userGameChoice == 4) {
                 gamePrinter.printCompareBandStats(myBand, rivalBand);
             } else if (userGameChoice  == 0) {

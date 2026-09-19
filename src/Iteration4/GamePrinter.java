@@ -51,7 +51,7 @@ public class GamePrinter {
                     
                     ====== 🚀 BAND SIM 🚀 ======
                     Your journey to becoming a legendary band starts here!
-                    Build your reputation, grow your fanbase, earn money and gain experience by
+                    Build your reputation, grow your fan base, earn money and gain experience by
                     playing concerts and upgrading your equipment.
                     Keep an eye on your Fame Level — the more famous you become, the bigger
                     opportunities will become available.
@@ -86,14 +86,14 @@ public class GamePrinter {
                 + "\n" + "Status: " + band.getStatusTitle(band.getBandFameLevel())
                 + "\n" + "Fans: " + band.getBandCurrentFans() + "/" + band.bandMaxFans(band.getBandFameLevel())
                 + " (" + band.getFanPercentage() + "%)"
-                + "\n" + "XP: " + band.getBandXP()
+                + "\n" + "XP: " + band.getBandXP() + "/" + band.xpThreshold()
                 + "\n" + "Money: $" + band.getBandCurrentBalance()
                 + "\n" + "Active: " + band.isBandActive()
         );
     }
 
     public void printCompareBandStats(Band myBand, Band rivalBand) {
-        System.out.println("====== " + myBand.getBandName() + " VS " + rivalBand.getBandName() + " ======"
+        System.out.println("====== ⚔️ " + myBand.getBandName() + " VS " + rivalBand.getBandName() + " ⚔️ ======"
                 + "\n" + myBand.getBandName() + " fans: " + myBand.getBandCurrentFans()
                 + "\n" + rivalBand.getBandName() + " fans: " + rivalBand.getBandCurrentFans()
                 + "\n" + myBand.getBandName() + " fame level: " + myBand.getBandFameLevel()
@@ -154,7 +154,7 @@ public class GamePrinter {
 
     public void printSingleConcert(Band band, VenueLogic venueLogic) {
         //Print of result
-        System.out.println("\n" + "====== " + venueLogic.getVenueName() + " ======"
+        System.out.println("\n" + "====== 🕺🏼 " + venueLogic.getVenueName() + " 🕺🏼 ======"
                 + "\n" + "Playing at venue (capacity: " + venueLogic.getVenueCapacity() + ")"
                 + "\n" + "Attendance: " + venueLogic.getAttendance() + " (" + venueLogic.getAttendancePercentage() + "%)"
                 + "\n" + "Turnout: " + venueLogic.getConcertTurnout()
@@ -169,17 +169,15 @@ public class GamePrinter {
         System.out.println("Thanks for playing! See you soon.");
     }
 
-    public void printShopMenu() {
-        System.out.println("""
-                
-                ====== 🛒 SHOP 🛒 ======
-                This is the shop - Here you can buy/upgrade equipment
-                (Type the number of an item listed below, to show more details)
-                1 - Speakers (Level 0)
-                2 - Equipment (Level 0)
-                ? - Stadium concert unlock(Level ?)
-                ? - Start a tour unlock(Level ?)
-                0 - Back to main menu"""
+    public void printShopMenu(Shop shop) {
+        System.out.println("====== 🛒 SHOP 🛒 ======"
+                + "\n" + "This is the shop - Here you can buy/upgrade equipment"
+                + "\n" + "(Type the number of an item listed below, to show more details)"
+                + "\n" + "1 - Speakers (" + "Level 0" + ") - NOT CREATED YET!"
+                + "\n" + "2 - Equipment (" + "Level 0" + ") - NOT CREATED YET!"
+                + "\n" + "3 - Stadium concert unlock $" + shop.getStadiumConcertUnlockPrice() + "(Level ?)"
+                + "\n" + "4 - Start a tour unlock $" + shop.getStatATourUnlockPrice() + "(Level ?)"
+                + "\n" + "0 - Back to main menu"
         );
     }
 

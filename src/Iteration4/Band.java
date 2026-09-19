@@ -166,7 +166,7 @@ public class Band {
 
     public int xpThreshold() {
         if (bandFameLevel == 1) {
-            return 3500;
+            return 3000;
         } else if (bandFameLevel == 2) {
             return 7500;
         } else if (bandFameLevel == 3) {
