@@ -27,19 +27,6 @@ public class Main {
 //Optimize Band class and so on with switch statement and so on to compress the code length!
 //---------------------------------------------------------------------------------------------------------------------
 //Known issues:
-//When playing the game, it's possible to reach above level 5! + Max fans is not shown currently! + Fan procent is bugged!
-//T
-//====== 📝 Band profile 📝 ======
-//Name: Eurythmics
-//Genre: R (Rock)
-//Fame level: 13
-//Status: Unknown fame level!
-//Fans: 109329/0 (Infinity%)
-//Fan base: Infinity% of venue capacity
-//XP: 0.0
-//Money: $236479.40000000002
-//Active: true
-
 //When playing a gig, and leveling up, the XP is shown incorrectly! + Max fans seems to be stuck when reaching 109329!
 //====== GIG NIGHT ======
 //Playing at venue (capacity: 1500)
@@ -54,3 +41,5 @@ public class Main {
 //When reaching max fans, it is not displayed anywhere!
 
 //XP system seems to be broken when playing concerts!
+
+//When reaching level 5 - Max xp is still displayed as such: XP: 105622.0/30000

@@ -59,7 +59,7 @@ public class GameLogic {
                 venueLogic.largeVenue(myBand, rivalBand);
                 gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
-            } else if (concertUserChoice == 4 && shop.isStadiumConcertUnlocked()) { //TODO: FIXER DEN NU!
+            } else if (concertUserChoice == 4 && shop.isStadiumConcertUnlocked()) {
                 venueLogic.stadiumConcert(myBand, rivalBand);
                 gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
@@ -79,7 +79,7 @@ public class GameLogic {
                 venueLogic.festivalMainStage(myBand, rivalBand);
                 gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
-            } else if (concertUserChoice == 9 && shop.isStatATourUnlocked()) { //TODO: SHOP LOGIC MISSING!
+            } else if (concertUserChoice == 9 && shop.isStatATourUnlocked()) {
                 venueLogic.showTourMenu(myBand, rivalBand, gamePrinter, venueLogic, keyboardInput);
                 //executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter); //This is not correctly implemented here!
             } else if (concertUserChoice == 0) {

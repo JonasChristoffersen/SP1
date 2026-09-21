@@ -162,7 +162,7 @@ public class Band {
     }
 
     public void levelUp() {
-        if (bandXP >= xpThreshold()) {
+        if (bandFameLevel < 5 && bandXP >= xpThreshold()) {
             bandFameLevel++;
             bandXP = 0;
         }
