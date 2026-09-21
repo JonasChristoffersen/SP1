@@ -24,7 +24,6 @@ public class GameLoop {
         this.randomEvents = randomEvents;
         this.myBand = myBand;
         this.rivalBand = rivalBand;
-
     }
 
     public void welcomeMessage() {
@@ -43,6 +42,7 @@ public class GameLoop {
                 bandGenreChoice();
                 break;
             } else if (userAnswer.equalsIgnoreCase("n")) {
+                rivalBand.setBandName("Dire Straits");
                 break;
             } else {
                 gamePrinter.printInvalidCommandText();
@@ -105,6 +105,4 @@ public class GameLoop {
             }
         }
     }
-
-
 }
