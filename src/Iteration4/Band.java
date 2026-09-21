@@ -152,6 +152,10 @@ public class Band {
         return bandCurrentBalance += amount;
     }
 
+    public double spendMoney(double amount) {
+        return bandCurrentBalance -= amount;
+    }
+
     public void addXP(int amount) {
         bandXP += amount;
         levelUp();

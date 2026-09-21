@@ -1,6 +1,7 @@
 package Iteration4;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class VenueLogic {
     private Random random = new Random();
@@ -12,6 +13,10 @@ public class VenueLogic {
     private String concertTurnout;
     private double attendancePercentage;
     private String venueName;
+
+    //Booleans
+    private boolean showTourMenuRunning = true;
+    boolean pickTourAmountRunning = true;
 
     public void concertOutcomeLogic() {
         attendancePercentage = (double) attendance / venueCapacity * 100;
@@ -44,7 +49,7 @@ public class VenueLogic {
         attendance = random.nextInt(101) + (venueCapacity - 100);
         //Call of concertOutcomeLogic method
         concertOutcomeLogic();
-        //Add values to band variables:
+        //Add values to band variables
         band.earnMoney(concertEarnMoney);
         band.gainFans(concertGainFans);
         band.addXP(attendance);
@@ -108,7 +113,41 @@ public class VenueLogic {
         concertVariableLogic(rivalBand);
     }
 
-    public void showTourMenu(Band myBand, Band rivalBand) {
+    public void showTourMenu(Band myBand, Band rivalBand, GamePrinter gamePrinter, VenueLogic venueLogic, Scanner keyboardInput) {
+        showTourMenuRunning = true;
+        while (showTourMenuRunning) {
+            gamePrinter.printTourMenu();
+            int tourMenuChoice = keyboardInput.nextInt();
+            switch (tourMenuChoice) {
+                case 1 -> pickTourAmount(myBand, rivalBand, gamePrinter, venueLogic, keyboardInput);
+                case 0 -> showTourMenuRunning = false;
+                default -> gamePrinter.printInvalidCommandText();
+            }
+        }
+    }
+
+    public void pickTourAmount(Band myBand, Band rivalBand, GamePrinter gamePrinter,VenueLogic venueLogic,
+                               Scanner keyboardInput) {
+        pickTourAmountRunning = true;
+        while (pickTourAmountRunning) {
+            gamePrinter.printTourAmountQuestion();
+            int tourAmountChoice = keyboardInput.nextInt();
+            switch (tourAmountChoice) {
+                case 1, 2, 3, 4, 5 -> tourLogic(tourAmountChoice, myBand, rivalBand, gamePrinter, venueLogic);
+                case 0 -> pickTourAmountRunning = false;
+                default -> gamePrinter.printInvalidCommandText();
+            }
+        }
+    }
+
+    public void tourLogic(int amountOfConcerts, Band myBand, Band rivalBand, GamePrinter gamePrinter, VenueLogic venueLogic) {
+        gamePrinter.printTourStagesHeader();
+        for (int i = 0; i < amountOfConcerts; i++) {
+            smallVenue(myBand, rivalBand);
+            gamePrinter.printTourStages(venueLogic, myBand);
+        }
+        pickTourAmountRunning = false;
+        showTourMenuRunning = false;
     }
 
     //Getters needed to provide to "GamePrinter" class

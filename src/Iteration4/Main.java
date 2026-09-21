@@ -24,6 +24,7 @@ public class Main {
 }
 //---------------------------------------------------------------------------------------------------------------------
 //Maybe add "Admin" user settings if user inputs admin as band name when starting the game
+//Optimize Band class and so on with switch statement and so on to compress the code length!
 //---------------------------------------------------------------------------------------------------------------------
 //Known issues:
 //When playing the game, it's possible to reach above level 5! + Max fans is not shown currently! + Fan procent is bugged!

@@ -41,7 +41,7 @@ public class GamePrinter {
                     Are you ready to start your journey?
                     (Type the number of an action listed below)
                     1 - 🚀 Start game
-                    2 - 🟡 Help/Info (NOT CREATED YET)
+                    2 - 🙋🏼‍♂️ Help/Info
                     0 - ❌ Exit game"""
         );
     }
@@ -60,6 +60,7 @@ public class GamePrinter {
                     2 - 🎸 Play a concert/tour
                     3 - 🛒 Shop
                     4 - 🆚 Compare your band to rival
+                    5 - 🙋🏼‍♂️ Help/Info
                     0 - ❌ Exit game"""
         );
     }
@@ -73,6 +74,7 @@ public class GamePrinter {
                     2 - 🎸 Play a concert/tour
                     3 - 🛒 Shop
                     4 - 🆚 Compare your band to rival
+                    5 - 🙋🏼‍♂️ Help/Info
                     0 - ❌ Exit game"""
         );
     }
@@ -106,7 +108,7 @@ public class GamePrinter {
 
     }
 
-    public void printConcertMenu(Band myBand, GameLogic gameLogic) {
+    public void printConcertMenu(Band myBand, GameLogic gameLogic, Shop shop) {
         System.out.println("\n" + "====== 🎸 PLAY A CONCERT/TOUR 🎸 ======"
                 + "\n" + myBand.getBandName() + " is setting up arrangements..."
                 + "\n" + "What kind of event should they be looking for?"
@@ -114,12 +116,12 @@ public class GamePrinter {
                 + "\n" + "1 - Small venue (Unlocked ✅ - Fame level 1)"
                 + "\n" + "2 - Medium Venue (" + gameLogic.getVenueStatus(gameLogic.isVenueUnlocked(myBand, 2)) + " - Fame level 2)"
                 + "\n" + "3 - Large Venue (" + gameLogic.getVenueStatus(gameLogic.isVenueUnlocked(myBand, 3)) + " - Fame level 3)"
-                + "\n" + "4 - Stadium concert (" + "Locked 🔒" + " - Visit the shop)"
+                + "\n" + "4 - Stadium concert " + gameLogic.getStadiumStatus(shop)
                 + "\n" + "5 - Festival small stage (" + gameLogic.getVenueStatus(gameLogic.isVenueUnlocked(myBand, 3)) + " - Fame level 2)"
                 + "\n" + "6 - Festival medium stage (" + gameLogic.getVenueStatus(gameLogic.isVenueUnlocked(myBand, 4)) + " - Fame level 3)"
                 + "\n" + "7 - Festival Large Stage (" + gameLogic.getVenueStatus(gameLogic.isVenueUnlocked(myBand, 4)) +" - Fame level 4)"
                 + "\n" + "8 - Festival main stage (" + gameLogic.getVenueStatus(gameLogic.isVenueUnlocked(myBand, 5)) + " - Fame level 5)"
-                + "\n" + "9 - Start a tour (" + "Locked 🔒" + " - Visit the shop)"
+                + "\n" + "9 - Start a tour " + gameLogic.getStartATourStatus(shop)
                 + "\n" + "0 - Cancel, go back to main menu"
         );
     }
@@ -170,18 +172,114 @@ public class GamePrinter {
     }
 
     public void printShopMenu(Shop shop) {
-        System.out.println("====== 🛒 SHOP 🛒 ======"
+        System.out.println("\n" + "====== 🛒 SHOP 🛒 ======"
                 + "\n" + "This is the shop - Here you can buy/upgrade equipment"
                 + "\n" + "(Type the number of an item listed below, to show more details)"
                 + "\n" + "1 - Speakers (" + "Level 0" + ") - NOT CREATED YET!"
                 + "\n" + "2 - Equipment (" + "Level 0" + ") - NOT CREATED YET!"
-                + "\n" + "3 - Stadium concert unlock $" + shop.getStadiumConcertUnlockPrice() + "(Level ?)"
-                + "\n" + "4 - Start a tour unlock $" + shop.getStatATourUnlockPrice() + "(Level ?)"
+                + "\n" + "3 - Stadium concert unlock " + shop.stadiumUnlockShopText()
+                + "\n" + "4 - Start a tour unlock " + shop.startATourShopText()
                 + "\n" + "0 - Back to main menu"
         );
     }
 
-    //Not implemented yet/set up correctly
+    public void printStadiumConcertUnlocked() {
+        System.out.println("""
+                
+                Stadium concert is now unlocked!""");
+    }
+
+    public void printStartATourUnlocked() {
+        System.out.println("""
+                
+                Tours are now unlocked!""");
+    }
+
+    public void printNotEnoughFounds() {
+        System.out.println("""
+                
+                You do not have sufficient funds for this unlock!""");
+    }
+
+    public void printAlreadyUnlocked() {
+        System.out.println("""
+                
+                This item is already unlocked!""");
+    }
+
+    public void printTourMenu() {
+        System.out.println("""
+                
+                ====== 💃 START A TOUR 💃 ======
+                (Type the number of an action listed below)
+                1 - Start a tour (1-5 concerts)
+                0 - Go back"""
+        );
+    }
+
+    public void printTourAmountQuestion() {
+        System.out.println("""
+                
+                How many concert do you want the tour to consist of? (Choose between 1-5)
+                All tours that will be played, will be chosen random from unlocked venues!
+                (Press 0 to cancel!)""");
+    }
+
+    public void printTourStagesHeader() {
+        System.out.println("\n" + "====== 💫 TOUR SUMMARY 💫 ======");
+    }
+
+    public void printTourStages(VenueLogic venueLogic, Band myBand) {
+        System.out.println(myBand.getBandName() + "Stage size: " + venueLogic.getVenueName()
+                + " | " + "Payment: $" + venueLogic.getConcertEarnMoney()
+                + " | " + "Attendance: " + venueLogic.getAttendance()
+                + " | " + "Venue capacity: " + venueLogic.getVenueCapacity()
+                + " | " + "Gained fans: " + venueLogic.getConcertGainFans()
+                + " | " + "Turnout: " + venueLogic.getConcertTurnout()
+                + " | " + "Attendance percentage: " + venueLogic.getAttendancePercentage() + "%"
+        );
+    }
+
+    public void printHelpAndInfo() {
+        System.out.println("""
+                
+                ╔══════════════════════════════════════════════════════════════════╗
+                ║ HELP / INFO                                                      ║
+                ║                                                                  ║
+                ║ Welcome to Band Sim!                                             ║
+                ║ Your goal is to grow your band from an unknown band into a       ║
+                ║ legendary superstar. Build your fan base, earn money, gain XP    ║
+                ║ and increase your Fame Level to unlock new opportunities.        ║
+                ║                                                                  ║
+                ║ ══ PLAYING CONCERTS ════════════════════════════════════════════ ║
+                ║ Play concerts at different venues to grow your band. As your     ║
+                ║ Fame Level increases, bigger venues and festivals become         ║
+                ║ available.                                                       ║
+                ║                                                                  ║
+                ║ ══ CONCERT PERFORMANCE ═════════════════════════════════════════ ║
+                ║ Your performance determines how successful your concert is.      ║
+                ║ A successful concert can help your band gain fans, money and XP. ║
+                ║                                                                  ║
+                ║ ══ RANDOM EVENTS ═══════════════════════════════════════════════ ║
+                ║ After concerts, unexpected random events can occur. These        ║
+                ║ events can either help or hurt your band, so be prepared!        ║
+                ║                                                                  ║
+                ║ ══ SHOP ════════════════════════════════════════════════════════ ║
+                ║ Use your money in the shop to unlock new opportunities and       ║
+                ║ improve your band's career.                                      ║
+                ║                                                                  ║
+                ║ ══ TOURS ═══════════════════════════════════════════════════════ ║
+                ║ Once unlocked, you can take your band on a tour consisting of    ║
+                ║ multiple concerts. Choose how many concerts you want to play     ║
+                ║ and let the tour begin!                                          ║
+                ║                                                                  ║
+                ║ ══ BECOME A LEGEND ═════════════════════════════════════════════ ║
+                ║ Grow your fan base, increase your Fame Level, unlock new         ║
+                ║ opportunities and become the biggest band in the game!           ║
+                ║                                                                  ║
+                ╚══════════════════════════════════════════════════════════════════╝""");
+    }
+
     public void printGameOverText() {
         System.out.println("""
                 [1;31m

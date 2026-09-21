@@ -40,10 +40,10 @@ public class GameLogic {
     }
 
     public void concertMenu(Band myBand, Band rivalBand, VenueLogic venueLogic, RandomEvents randomEvents,
-                            GamePrinter gamePrinter, GameLogic gameLogic, Scanner keyboardInput) {
+                            GamePrinter gamePrinter, GameLogic gameLogic, Scanner keyboardInput, Shop shop) {
         while (true) {
             //Print of options
-            gamePrinter.printConcertMenu(myBand, gameLogic);
+            gamePrinter.printConcertMenu(myBand, gameLogic, shop);
 
             //BE AWARE THAT LOGIC FOR LOCKED CONCERTS THAT NEEDS TO BE BOUGHT IN SHOP IS NOT CREATED/IMPLEMENTED YET!
             int concertUserChoice = keyboardInput.nextInt();
@@ -59,7 +59,7 @@ public class GameLogic {
                 venueLogic.largeVenue(myBand, rivalBand);
                 gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
-            } else if (concertUserChoice == 4 && isVenueUnlocked(myBand, 1000)) { //SHOP LOGIC MISSING!
+            } else if (concertUserChoice == 4 && shop.isStadiumConcertUnlocked()) { //TODO: FIXER DEN NU!
                 venueLogic.stadiumConcert(myBand, rivalBand);
                 gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
@@ -79,9 +79,9 @@ public class GameLogic {
                 venueLogic.festivalMainStage(myBand, rivalBand);
                 gamePrinter.printSingleConcert(myBand, venueLogic);
                 executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
-            } else if (concertUserChoice == 9 && isVenueUnlocked(myBand, 1000)) { //SHOP LOGIC MISSING!
-                venueLogic.showTourMenu(myBand, rivalBand);
-                executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter);
+            } else if (concertUserChoice == 9 && shop.isStatATourUnlocked()) { //TODO: SHOP LOGIC MISSING!
+                venueLogic.showTourMenu(myBand, rivalBand, gamePrinter, venueLogic, keyboardInput);
+                //executeRandomEvent(myBand, rivalBand, randomEvents, gamePrinter); //This is not correctly implemented here!
             } else if (concertUserChoice == 0) {
                 break;
             } else {
@@ -101,6 +101,22 @@ public class GameLogic {
             return "Unlocked ✅";
         } else {
             return "Locked 🔒";
+        }
+    }
+
+    public String getStadiumStatus(Shop shop) {
+        if (shop.isStadiumConcertUnlocked()) {
+            return "(Unlocked ✅)";
+        } else {
+            return "(Locked 🔒 - Visit the shop)";
+        }
+    }
+
+    public String getStartATourStatus(Shop shop) {
+        if (shop.isStatATourUnlocked()) {
+            return "(Unlocked ✅)";
+        } else {
+            return "(Locked 🔒 - Visit the shop)";
         }
     }
 

@@ -73,6 +73,8 @@ public class GameLoop {
             int mainMenuChoice = keyboardInput.nextInt();
             if (mainMenuChoice == 1) {
                 startGame();
+            } else if (mainMenuChoice == 2) {
+                gamePrinter.printHelpAndInfo();
             } else if (mainMenuChoice == 0) {
                 System.exit(0);
             } else {
@@ -89,11 +91,13 @@ public class GameLoop {
                 gamePrinter.printBandStats(myBand);
             } else if (userGameChoice  == 2) {
                 gameLogic.concertMenu(myBand, rivalBand, venueLogic, randomEvents, gamePrinter,
-                        gameLogic, keyboardInput);
+                        gameLogic, keyboardInput, shop);
             } else if (userGameChoice  == 3) {
                 shop.shopMenu(myBand, gamePrinter, keyboardInput, shop);
             } else if (userGameChoice == 4) {
                 gamePrinter.printCompareBandStats(myBand, rivalBand);
+            } else if (userGameChoice == 5) {
+                gamePrinter.printHelpAndInfo();
             } else if (userGameChoice  == 0) {
                 gameLogic.exitConfirmationLoop(gamePrinter, keyboardInput);
             } else {
