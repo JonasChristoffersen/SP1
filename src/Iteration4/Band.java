@@ -84,35 +84,25 @@ public class Band {
     }
 
     public String getStatusTitle(int fameLevel) {
-        if (fameLevel == 1) {
-            return "Unknown - Playing in garages";
-        } else if (fameLevel == 2) {
-            return "Local Hero - Small venues await";
-        } else if (fameLevel == 3) {
-            return "Rising Star - Festival invitations coming in";
-        } else if (fameLevel == 4) {
-            return "Mainstream - Arena tours possible";
-        } else if (fameLevel == 5) {
-            return "Superstar - Stadium glory!";
-        } else {
-            return "Unknown fame level!";
+        switch (fameLevel) {
+            case 1 -> {return "Unknown - Playing in garages";}
+            case 2 -> {return "Local Hero - Small venues await";}
+            case 3 -> {return "Rising Star - Festival invitations coming in";}
+            case 4 -> {return "Mainstream - Arena tours possible";}
+            case 5 -> {return "Superstar - Stadium glory!";}
+            default -> {return "Unknown fame level!";}
         }
     }
 
+
     public int bandMaxFans(int fameLevel) {
-        //Logic for max fans in perspective to what fame level band is
-        if (fameLevel == 1) {
-            return 5000;
-        } else if (fameLevel == 2) {
-            return 15000;
-        } else if (fameLevel == 3) {
-            return 50000;
-        } else if (fameLevel == 4) {
-            return 200000;
-        } else if (fameLevel == 5) {
-            return 1000000;
-        } else {
-            return 0;
+        switch (fameLevel) {
+            case 1 -> {return 5000;}
+            case 2 -> {return 15000;}
+            case 3 -> {return 50000;}
+            case 4 -> {return 200000;}
+            case 5 -> {return 1000000;}
+            default -> {return 0;}
         }
     }
 
