@@ -151,7 +151,7 @@ public class GamePrinter {
         );
     }
 
-    public void printBandStats(Band band) {
+    public void printBandStats(Band band, Shop shop) {
         System.out.println("\n" + "====== 📝 Band profile 📝 ======"
                 //+ "\n" + "(Press any key when you are ready to go back)"
                 + "\n" + "Name: " + band.getBandName()
@@ -163,6 +163,10 @@ public class GamePrinter {
                 + "\n" + "XP: " + band.getBandXP() + "/" + band.xpThreshold()
                 + "\n" + "Money: $" + band.getBandCurrentBalance()
                 + "\n" + "Active: " + band.isBandActive()
+                + "\n" + "Equipment level: " + shop.getEquipmentShopLevel() + "/5"
+                + " (" + (int) Math.round((shop.getEquipmentBonus() - 1) * 100) + "% extra money gained from concerts)"
+                + "\n" + "Speaker level: " + shop.getSpeakersShopLevel() + "/5"
+                + " (" + (int) Math.round((shop.getSpeakersBonus() - 1) * 100) + "% extra fans gained from concerts)"
         );
     }
 
@@ -247,8 +251,8 @@ public class GamePrinter {
         System.out.println("\n" + "====== 🛒 SHOP 🛒 ======"
                 + "\n" + "This is the shop - Here you can buy/upgrade equipment"
                 + "\n" + "(Type the number of an item listed below, to show more details)"
-                + "\n" + "1 - Speakers (" + "Level 0" + ") - NOT CREATED YET!"
-                + "\n" + "2 - Equipment (" + "Level 0" + ") - NOT CREATED YET!"
+                + "\n" + "1 - Speakers " + shop.speakersPriceText() + " (Level " + shop.getSpeakersShopLevel() + "/5)"
+                + "\n" + "2 - Equipment " + shop.equipmentPriceText() + " (Level " + shop.getEquipmentShopLevel() + "/5)"
                 + "\n" + "3 - Stadium concert unlock " + shop.stadiumUnlockShopText()
                 + "\n" + "4 - Start a tour unlock " + shop.startATourShopText()
                 + "\n" + "0 - Back to main menu"

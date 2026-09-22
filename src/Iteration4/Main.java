@@ -23,8 +23,6 @@ public class Main {
     }
 }
 //---------------------------------------------------------------------------------------------------------------------
-//TODO: Optimize Band class and so on with switch statement and so on to compress the code length!
-//TODO: Add shop logic regarding upgrades of equipment
 //---------------------------------------------------------------------------------------------------------------------
 //Known issues:
 //When playing a gig, and leveling up, the XP is shown incorrectly! + Max fans seems to be stuck when reaching 109329!

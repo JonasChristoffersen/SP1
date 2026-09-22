@@ -88,7 +88,7 @@ public class GameLoop {
             gameLogic.gameMenuMessages(gamePrinter, myBand);
             int userGameChoice = keyboardInput.nextInt();
             if (userGameChoice  == 1) {
-                gamePrinter.printBandStats(myBand);
+                gamePrinter.printBandStats(myBand, shop);
             } else if (userGameChoice  == 2) {
                 gameLogic.concertMenu(myBand, rivalBand, venueLogic, randomEvents, gamePrinter,
                         gameLogic, keyboardInput, shop);
