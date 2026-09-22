@@ -3,28 +3,75 @@ package Iteration4;
 import java.util.Scanner;
 
 public class GameLogic {
-    private int count = 0;
+    private int firstTimerCount = 0;
     public boolean isFirstTimer() {
-        if (count == 0) {
-            count++;
+        if (firstTimerCount == 0) {
+            firstTimerCount++;
             return true;
         } else {
             return false;
         }
     }
 
-    public void gameMenuMessages(GamePrinter gamePrinter) {
-        if (isFirstTimer()) {
+    public boolean isAdmin(Band myBand) {
+        if (myBand.getBandName().equals("Admin")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void gameMenuMessages(GamePrinter gamePrinter, Band myBand) {
+        if (isAdmin(myBand)) {
+            gamePrinter.printAdminMainMenu();
+        } else if (isFirstTimer()) {
             gamePrinter.printFirstTimerMainMenu();
         } else {
             gamePrinter.printMainMenu();
         }
     }
 
+    public void shopAdminMenu(Band myBand, GamePrinter gamePrinter, Scanner keyboardInput) {
+        while (true) {
+            gamePrinter.printAdminSetterMenu(myBand);
+            int userAdminMenuChoice = keyboardInput.nextInt();
+            keyboardInput.nextLine();
+            if (userAdminMenuChoice == 1) {
+                gamePrinter.printAdminSetValueQuestion();
+                String userInputBandName = keyboardInput.nextLine();
+                myBand.setBandName(userInputBandName);
+                gamePrinter.printAdminValuesIsChanged(userInputBandName);
+            } else if (userAdminMenuChoice == 2) {
+                gamePrinter.printAdminSetValueQuestion();
+                int userInputFameLevel = keyboardInput.nextInt();
+                myBand.setBandFameLevel(userInputFameLevel);
+                gamePrinter.printAdminValuesIsChanged(myBand.getBandFameLevel() + ""); //Set +"" to make this a string
+            } else if (userAdminMenuChoice == 3) {
+                gamePrinter.printAdminSetValueQuestion();
+                int userInputFans = keyboardInput.nextInt();
+                myBand.setBandCurrentFans(userInputFans);
+                gamePrinter.printAdminValuesIsChanged(myBand.getBandCurrentFans() + ""); //Set +"" to make this a string
+            } else if (userAdminMenuChoice == 4) {
+                gamePrinter.printAdminSetValueQuestion();
+                int userInputXP = keyboardInput.nextInt();
+                myBand.setBandXP(userInputXP);
+                gamePrinter.printAdminValuesIsChanged(myBand.getBandXP() + ""); //Set +"" to make this a string
+            } else if (userAdminMenuChoice == 5) {
+                gamePrinter.printAdminSetValueQuestion();
+                double userInputBalance = keyboardInput.nextDouble();
+                myBand.setBandCurrentBalance(userInputBalance);
+                gamePrinter.printAdminValuesIsChanged(userInputBalance + "");
+            } else if (userAdminMenuChoice == 0) {
+                break;
+            } else {
+                gamePrinter.printInvalidCommandText();
+            }
+        }
+    }
+
     public void exitConfirmationLoop(GamePrinter gamePrinter, Scanner keyboardInput) {
         //Flush of keyboardInput
         keyboardInput.nextLine();
-
         while (true) {
             gamePrinter.printExitConfirmationText();
             String userExitInput = keyboardInput.nextLine();

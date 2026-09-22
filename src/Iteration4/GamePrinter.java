@@ -34,48 +34,120 @@ public class GamePrinter {
         );
     }
 
+    private String textStartGame() {
+        return "\n" + "1 - 🚀 Start game";
+    }
+
+    private String textBandStats() {
+        return "\n" + "1 - 📝 Band stats";
+    }
+
+    private String textPlayConcert() {
+        return "\n" + "2 - 🎸 Play a concert/tour";
+    }
+
+    private String textShop() {
+        return "\n" + "3 - 🛒 Shop";
+    }
+
+    private String textCompareStats() {
+        return "\n" + "4 - 🆚 Compare your band to rival";
+    }
+
+    private String textHelpInfo() {
+        return "\n" + "5 - 🙋🏼‍♂️ Help/Info";
+    }
+
+    private String textExitGame() {
+        return "\n" + "0 - ❌ Exit game";
+    }
+
+    private String textAdminMenu(){
+        return "\n" + "9 - 🧩 Admin menu";
+    }
+
+    private String textTypeNumberAction() {
+        return "\n" + "(Type the number of an action listed below)";
+    }
+
+
     public void printStartMenu() {
-        System.out.println("""
-                    
-                    ====== 🔶 MAIN MENU 🔶 ======
-                    Are you ready to start your journey?
-                    (Type the number of an action listed below)
-                    1 - 🚀 Start game
-                    2 - 🙋🏼‍♂️ Help/Info
-                    0 - ❌ Exit game"""
+        System.out.println("\n" + "====== 🔶 MAIN MENU 🔶 ======"
+                + "\n" + "Are you ready to start your journey?"
+                + textTypeNumberAction()
+                + textStartGame()
+                + textHelpInfo()
+                + textExitGame()
         );
     }
 
     public void printFirstTimerMainMenu() {
-        System.out.println("""
-                    
-                    ====== 🚀 BAND SIM 🚀 ======
-                    Your journey to becoming a legendary band starts here!
-                    Build your reputation, grow your fan base, earn money and gain experience by
-                    playing concerts and upgrading your equipment.
-                    Keep an eye on your Fame Level — the more famous you become, the bigger
-                    opportunities will become available.
-                    (Type the number of an action listed below)
-                    1 - 📝 Band stats
-                    2 - 🎸 Play a concert/tour
-                    3 - 🛒 Shop
-                    4 - 🆚 Compare your band to rival
-                    5 - 🙋🏼‍♂️ Help/Info
-                    0 - ❌ Exit game"""
+        System.out.println("\n" + "====== 🚀 BAND SIM 🚀 ======"
+                + "\n" + "Your journey to becoming a legendary band starts here!"
+                + "\n" + "Build your reputation, grow your fan base, earn money and gain experience by"
+                + "\n" + "playing concerts and upgrading your equipment."
+                + "\n" + "Keep an eye on your Fame Level — the more famous you become, the bigger"
+                + "\n" + "opportunities will become available."
+                + textTypeNumberAction()
+                + textBandStats()
+                + textPlayConcert()
+                + textShop()
+                + textCompareStats()
+                + textHelpInfo()
+                + textExitGame()
         );
     }
 
     public void printMainMenu() {
-        System.out.println("""
-                    
-                    ====== 🎤 BAND SIM 🎤 ======
-                    (Type the number of an action listed below)
-                    1 - 📝 Band stats
-                    2 - 🎸 Play a concert/tour
-                    3 - 🛒 Shop
-                    4 - 🆚 Compare your band to rival
-                    5 - 🙋🏼‍♂️ Help/Info
-                    0 - ❌ Exit game"""
+        System.out.println("\n" + "====== 🎤 BAND SIM 🎤 ======"
+                + textTypeNumberAction()
+                + textBandStats()
+                + textPlayConcert()
+                + textShop()
+                + textCompareStats()
+                + textHelpInfo()
+                + textExitGame()
+        );
+    }
+
+    public void printAdminMainMenu() {
+        System.out.println("\n" + "====== ❗❗❗ ADMIN - MAIN MENU ❗❗❗ ======"
+                + textTypeNumberAction()
+                + textBandStats()
+                + textPlayConcert()
+                + textShop()
+                + textCompareStats()
+                + textHelpInfo()
+                + textAdminMenu()
+                + textExitGame()
+        );
+    }
+
+    public void printAdminSetValueQuestion() {
+        System.out.println("What do you want to set the value to?");
+    }
+
+    public void printAdminValuesIsChanged(String value) {
+        System.out.println("Value has been set to: " + value);
+    }
+
+    public void printAdminSetterMenu(Band myBand) {
+        System.out.println("\n" + "====== ❗❗❗ ADMIN - SETTER MENU ❗❗❗ ======"
+                + "\n" + "Current band values:"
+                + "\n" + "Band name: " + myBand.getBandName()
+                + "\n" + "Fame level: " + myBand.getBandFameLevel()
+                + "\n" + "Fans: " + myBand.getBandCurrentFans()
+                + "\n" + "XP: " + myBand.getBandXP()
+                + "\n" + "Money: $" + myBand.getBandCurrentBalance()
+                + "\n"
+                + "\n" + "Set values for band:"
+                + textTypeNumberAction()
+                + "\n" + "1 - myBand.setBandName(String \"Name\")"
+                + "\n" + "2 - myBand.setBandFameLevel(int fameLevel (1-5))"
+                + "\n" + "3 - myBand.setBandCurrentFans(int amount)"
+                + "\n" + "4 - myBand.setBandXP(int amount)"
+                + "\n" + "5 - myBand.setBandCurrentBalance(double amount)"
+                + "\n" + "0 - Back to main menu"
         );
     }
 

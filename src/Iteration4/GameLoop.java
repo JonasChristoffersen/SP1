@@ -73,7 +73,7 @@ public class GameLoop {
             int mainMenuChoice = keyboardInput.nextInt();
             if (mainMenuChoice == 1) {
                 startGame();
-            } else if (mainMenuChoice == 2) {
+            } else if (mainMenuChoice == 5) {
                 gamePrinter.printHelpAndInfo();
             } else if (mainMenuChoice == 0) {
                 System.exit(0);
@@ -85,7 +85,7 @@ public class GameLoop {
 
     public void startGame() {
         while (true) {
-            gameLogic.gameMenuMessages(gamePrinter);
+            gameLogic.gameMenuMessages(gamePrinter, myBand);
             int userGameChoice = keyboardInput.nextInt();
             if (userGameChoice  == 1) {
                 gamePrinter.printBandStats(myBand);
@@ -98,6 +98,8 @@ public class GameLoop {
                 gamePrinter.printCompareBandStats(myBand, rivalBand);
             } else if (userGameChoice == 5) {
                 gamePrinter.printHelpAndInfo();
+            } else if (userGameChoice == 9 && gameLogic.isAdmin(myBand)) {
+                gameLogic.shopAdminMenu(myBand, gamePrinter, keyboardInput);
             } else if (userGameChoice  == 0) {
                 gameLogic.exitConfirmationLoop(gamePrinter, keyboardInput);
             } else {
