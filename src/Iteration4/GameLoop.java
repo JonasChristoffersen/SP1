@@ -24,6 +24,7 @@ public class GameLoop {
         this.randomEvents = randomEvents;
         this.myBand = myBand;
         this.rivalBand = rivalBand;
+
     }
 
     public void welcomeMessage() {
@@ -42,7 +43,6 @@ public class GameLoop {
                 bandGenreChoice();
                 break;
             } else if (userAnswer.equalsIgnoreCase("n")) {
-                rivalBand.setBandName("Dire Straits");
                 break;
             } else {
                 gamePrinter.printInvalidCommandText();
@@ -73,8 +73,6 @@ public class GameLoop {
             int mainMenuChoice = keyboardInput.nextInt();
             if (mainMenuChoice == 1) {
                 startGame();
-            } else if (mainMenuChoice == 5) {
-                gamePrinter.printHelpAndInfo();
             } else if (mainMenuChoice == 0) {
                 System.exit(0);
             } else {
@@ -96,10 +94,6 @@ public class GameLoop {
                 shop.shopMenu(myBand, gamePrinter, keyboardInput, shop);
             } else if (userGameChoice == 4) {
                 gamePrinter.printCompareBandStats(myBand, rivalBand);
-            } else if (userGameChoice == 5) {
-                gamePrinter.printHelpAndInfo();
-            } else if (userGameChoice == 9 && gameLogic.isAdmin(myBand)) {
-                gameLogic.shopAdminMenu(myBand, gamePrinter, keyboardInput);
             } else if (userGameChoice  == 0) {
                 gameLogic.exitConfirmationLoop(gamePrinter, keyboardInput);
             } else {
@@ -107,4 +101,6 @@ public class GameLoop {
             }
         }
     }
+
+
 }
